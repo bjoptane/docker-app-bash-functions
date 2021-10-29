@@ -9,4 +9,6 @@ DEBUG = 1
 # PREFIX = arm-none-eabi-
 PREFIX =
 # The gcc compiler bin path can be either defined in make command via GCC_PATH variable (> make GCC_PATH=xxx)
-# eith
+# either it can be added to the PATH environment variable.
+ifdef GCC_PATH
+CC = $(GCC_PATH)/$(PREFIX)gcc
