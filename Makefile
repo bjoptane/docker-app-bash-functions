@@ -21,4 +21,8 @@ AS = $(PREFIX)gcc -x assembler-with-cpp
 CP = $(PREFIX)objcopy
 SZ = $(PREFIX)size
 endif
-HEX = $(CP) -O ihe
+HEX = $(CP) -O ihex
+BIN = $(CP) -O binary -S
+
+WARNS = -Wall -Wextra -Wuninitialized -Wsign-conversion
+CFLAGS = -s
