@@ -25,4 +25,14 @@ HEX = $(CP) -O ihex
 BIN = $(CP) -O binary -S
 
 WARNS = -Wall -Wextra -Wuninitialized -Wsign-conversion
-CFLAGS = -s
+CFLAGS = -std=c11 $(WARNS)
+
+ifeq ($(DEBUG), 1)
+CFLAGS += -g
+else
+CFLAGS += -O2
+endif
+
+LIBS = -lc -lm
+LIBDIR =
+LD
