@@ -35,4 +35,12 @@ endif
 
 LIBS = -lc -lm
 LIBDIR =
-LD
+LDFLAGS = $(LIBDIR) $(LIBS)
+
+
+BUILD_DIR = build
+
+SOURCES = \
+zcrypto/aes.c \
+zcrypto/base64.c \
+zcr
