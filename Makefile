@@ -49,4 +49,9 @@ zcrypto/md5.c \
 zcrypto/oaep.c \
 zcrypto/rsa.c \
 zcrypto/sha1.c \
-zcrypto/
+zcrypto/sha256.c \
+zcrypto/sm3.c \
+zcrypto/sm4.c
+
+OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(SOURCES:.c=.o)))
+vpath %.
