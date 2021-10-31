@@ -59,4 +59,7 @@ vpath %.c $(sort $(dir $(SOURCES)))
 all: \
 	$(BUILD_DIR)/test_aes.elf \
 	$(BUILD_DIR)/test_base64.elf \
-	$(BUILD_D
+	$(BUILD_DIR)/test_hash.elf \
+	$(BUILD_DIR)/test_oaep.elf \
+	$(BUILD_DIR)/test_rsa.elf \
+	$(BUILD_DIR)/test_sm4.elf
