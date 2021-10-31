@@ -54,4 +54,9 @@ zcrypto/sm3.c \
 zcrypto/sm4.c
 
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(SOURCES:.c=.o)))
-vpath %.
+vpath %.c $(sort $(dir $(SOURCES)))
+
+all: \
+	$(BUILD_DIR)/test_aes.elf \
+	$(BUILD_DIR)/test_base64.elf \
+	$(BUILD_D
