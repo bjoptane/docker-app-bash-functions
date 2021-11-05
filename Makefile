@@ -63,3 +63,8 @@ all: \
 	$(BUILD_DIR)/test_oaep.elf \
 	$(BUILD_DIR)/test_rsa.elf \
 	$(BUILD_DIR)/test_sm4.elf
+
+libs = $(BUILD_DIR)/libzcrypto.a
+
+$(BUILD_DIR)/%.elf: test/%.c $(libs) Makefile
+	$(CC) $(CFLAGS) -I. $< $
