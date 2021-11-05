@@ -67,4 +67,10 @@ all: \
 libs = $(BUILD_DIR)/libzcrypto.a
 
 $(BUILD_DIR)/%.elf: test/%.c $(libs) Makefile
-	$(CC) $(CFLAGS) -I. $< $
+	$(CC) $(CFLAGS) -I. $< $(libs) $(LDFLAGS) -o $@
+
+$(BUILD_DIR)/libzcrypto.a: $(OBJECTS) Makefile
+	ar rcs $@ $(OBJECTS)
+	ranlib $@
+
+$(BUILD_DIR)/%.o: %.c Mak
