@@ -73,4 +73,13 @@ $(BUILD_DIR)/libzcrypto.a: $(OBJECTS) Makefile
 	ar rcs $@ $(OBJECTS)
 	ranlib $@
 
-$(BUILD_DIR)/%.o: %.c Mak
+$(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR)
+	$(CC) -c $(CFLAGS) $< -o $@
+
+$(BUILD_DIR):
+	mkdir $@
+
+
+.PHONY: clean
+clean:
+	rm -rf $(BUILD_DIR)
