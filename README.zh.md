@@ -10,4 +10,13 @@
     * SHA256
 * block cipher algorithm
     * AES(128, 192, 256)
-    *
+    * SM4
+* block cipher mode
+    * ECB
+    * CBC
+    * CFB
+    * OFB
+* asymmetric key encryption
+    * RSA(2048)
+
+## 分组密码
