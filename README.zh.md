@@ -22,4 +22,6 @@
 ## 分组密码
 
 支持：AES（192、169，256）， SM4，模式支持ECB，CBC，CFB，OFB。
-支持两种风格的API。一种是：`aes_{keylen}_{mode}_{en/de}crypt`和`sm4_{
+支持两种风格的API。一种是：`aes_{keylen}_{mode}_{en/de}crypt`和`sm4_{mode}_{en/de}crypt`，这是做一次性加密（解密）的。
+另一种是`aes_{en/de}crypt(aes_ctx_t*, ...)`和`sm4_{en/de}crypt(sm4_ctx_t*, ...)`，这种可以调用多次，
+对
