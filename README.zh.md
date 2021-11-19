@@ -40,4 +40,4 @@
 使用`./test/rsa_naive_test.py | ./build/test_rsa.elf`进行测试。
 
 使用`rsa_pub_oaep_encrypt`进行`RSAES-OAEP`运算，请参考[RFC8017](https://tools.ietf.org/html/rfc8017#section-7.1)。
-具体使用请看`test/test_oaep.c
+具体使用请看`test/test_oaep.c`。 使用`./test/rsa_oaep_test.py gen | ./build/test_oaep.elf | ./test/rsa_oaep_test.py verify`进行测试。
