@@ -106,3 +106,133 @@ static int SM4_init(SM4Object *self, PyObject *args, PyObject *kwargs) {
         PyErr_SetString(PyExc_ValueError, "ECB_MODE requires no iv");
         return -1;
     }
+    if (mode != SM4_ECB_MODE && iv == NULL) {
+        PyErr_SetString(PyExc_ValueError, "iv is required");
+        return -1;
+    }
+    uint8_t *ivdata = NULL;
+    if (iv != NULL) {
+        if (PyBytes_Size(iv) != 16) {
+            PyErr_SetString(PyExc_ValueError, "len(iv) == 16 is required");
+            return -1;
+        }
+        ivdata = (uint8_t*)PyBytes_AsString(iv);
+    }
+    uint8_t *keydata = (uint8_t*)PyBytes_AsString(key);
+    int r = sm4_init(&self->ctx, mode, keydata, ivdata);
+    if (r != 0) {
+        PyErr_SetString(PyExc_Exception, "sm4_init failed");
+        return -1;
+    }
+    return 0;
+}
+
+static void SM4_dealloc(SM4Object *self) {
+    memset(&self->ctx, 0, sizeof(sm4_ctx_t));
+}
+
+static PyObject *SM4_encrypt(SM4Object *self, PyObject *data) {
+    if (!PyBytes_Check(data)) {
+        PyErr_SetString(PyExc_ValueError, "data MUST be bytes");
+        return NULL;
+    }
+    Py_ssize_t len = PyBytes_Size(data);
+    if (PyBytes_Size(data) % 16 != 0) {
+        PyErr_SetString(PyExc_ValueError, "len(data) == 16*N is required");
+        return NULL;
+    }
+    uint8_t *dd = (uint8_t*)PyBytes_AsString(data);
+    uint8_t *cc = (uint8_t*)malloc(len);
+    int r = sm4_encrypt(&self->ctx, len, dd, cc);
+    if (r != 0) {
+        free(cc);
+        PyErr_SetString(PyExc_Exception, "sm4_encrypt failed");
+        return NULL;
+    }
+    PyObject *out = PyBytes_FromStringAndSize((const char *)cc, len);
+    free(cc);
+    return out;
+}
+
+static PyObject *SM4_decrypt(SM4Object *self, PyObject *data) {
+    if (!PyBytes_Check(data)) {
+        PyErr_SetString(PyExc_ValueError, "data MUST be bytes");
+        return NULL;
+    }
+    Py_ssize_t len = PyBytes_Size(data);
+    if (PyBytes_Size(data) % 16 != 0) {
+        PyErr_SetString(PyExc_ValueError, "len(data) == 16*N is required");
+        return NULL;
+    }
+    uint8_t *dd = (uint8_t*)PyBytes_AsString(data);
+    uint8_t *cc = (uint8_t*)malloc(len);
+    int r = sm4_decrypt(&self->ctx, len, dd, cc);
+    if (r != 0) {
+        free(cc);
+        PyErr_SetString(PyExc_Exception, "sm4_decrypt failed");
+        return NULL;
+    }
+    PyObject *out = PyBytes_FromStringAndSize((const char *)cc, len);
+    free(cc);
+    return out;
+}
+
+static PyMethodDef SM4_methods[] = {
+    {
+        "encrypt",
+        (PyCFunction)SM4_encrypt,
+        METH_O,
+        "encrypt"
+    },
+    {
+        "decrypt",
+        (PyCFunction)SM4_decrypt,
+        METH_O,
+        "decrypt"
+    },
+    {NULL}
+};
+
+static PyTypeObject SM4Type = {
+    PyVarObject_HEAD_INIT(NULL, 0).tp_name = "zcrypto.SM4",
+    .tp_doc = "sm4_ctx_t",
+    .tp_basicsize = sizeof(SM4Object),
+    .tp_itemsize = 0,
+    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_new = PyType_GenericNew,
+    .tp_init = (initproc)SM4_init,
+    .tp_dealloc = (destructor)SM4_dealloc,
+    .tp_methods = SM4_methods,
+};
+
+PyObject *sm3(PyObject *Py_UNUSED(self), PyObject *data) {
+    if (!PyBytes_Check(data)) {
+        PyErr_SetString(PyExc_ValueError, "data MUST be bytes");
+        return NULL;
+    }
+    Py_ssize_t len = PyBytes_Size(data);
+    char *dd = PyBytes_AsString(data);
+    uint8_t digest[32] = {0};
+    sm3_ctx_t ctx;
+    sm3_init(&ctx);
+    sm3_update(&ctx, (const uint8_t *)dd, len);
+    sm3_digest(&ctx, digest);
+    return PyBytes_FromStringAndSize((const char *)digest, 32);
+}
+
+PyMethodDef zcrypto_funcs[] = {
+    {"sm3", sm3, METH_O, "sm3"},
+    {NULL}
+};
+
+PyModuleDef zcrypto_mod = {
+    PyModuleDef_HEAD_INIT,
+    "zcrypto", "zcrypto python interface",
+    -1,
+    zcrypto_funcs,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+};
+
