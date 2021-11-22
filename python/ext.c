@@ -236,3 +236,31 @@ PyModuleDef zcrypto_mod = {
     NULL,
 };
 
+
+#define _add_type(MOD, TYPE, NAME) \
+if (PyType_Ready(&TYPE) < 0) { \
+    return NULL; \
+} \
+Py_INCREF(&TYPE); \
+if (PyModule_AddObject(MOD, NAME, (PyObject*)&TYPE) < 0) { \
+    Py_DECREF(&TYPE); \
+    Py_DECREF(MOD); \
+    return NULL; \
+}
+
+PyMODINIT_FUNC PyInit_zcrypto(void) {
+    PyObject *mod = PyModule_Create(&zcrypto_mod);
+    if (mod == NULL) {
+        return NULL;
+    }
+
+    PyModule_AddIntConstant(mod, "SM4_ECB", SM4_ECB_MODE);
+    PyModule_AddIntConstant(mod, "SM4_CBC", SM4_CBC_MODE);
+    PyModule_AddIntConstant(mod, "SM4_CFB", SM4_CFB_MODE);
+    PyModule_AddIntConstant(mod, "SM4_OFB", SM4_OFB_MODE);
+
+    _add_type(mod, SM3Type, "SM3")
+    _add_type(mod, SM4Type, "SM4")
+
+    return mod;
+}
