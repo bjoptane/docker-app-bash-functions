@@ -16,4 +16,5 @@ print(src)
 setup(
     name = name,
 	version = ver,
-	ext_modules = [Extension(name, src, include_dirs=[rootd
+	ext_modules = [Extension(name, src, include_dirs=[rootdir])]
+)
