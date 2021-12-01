@@ -12,4 +12,6 @@ def generate(limit=1000):
     print("H", hh)
     print("B", bb)
 
-for _ in range(10
+for _ in range(10000):
+    generate()
+
