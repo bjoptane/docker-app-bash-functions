@@ -12,4 +12,7 @@ pkey = key.publickey()
 print("## keys:")
 print("E =", hex(pkey.e))
 n = hex(pkey.n)
-n = "0x" 
+n = "0x" + "0" * (LEN * 2 + 2 - len(n)) + n[2:]
+print("N =", n)
+d = hex(key.key.d)
+d = "0x" + "0" * (LEN * 2 + 2 - len(d
