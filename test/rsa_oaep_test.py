@@ -12,4 +12,9 @@ if len(sys.argv) <= 1:
     sys.exit(0)
 
 cmd = sys.argv[1]
-i
+if cmd != "gen" and cmd != "verify":
+    print("rsa_oaep_test.py gen | verify")
+    sys.exit(0)
+
+if cmd == "gen":
+    K =
