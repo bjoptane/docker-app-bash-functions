@@ -26,4 +26,8 @@ if cmd == "gen":
     pubKey = key.publickey()
     print("E =", hex(pubKey.e))
     n = hex(pubKey.n)
-    n = "0x" + "0
+    n = "0x" + "0" * (LEN * 2 + 2 - len(n)) + n[2:]
+    print("N =", n)
+    print()
+
+elif cmd == "veri
