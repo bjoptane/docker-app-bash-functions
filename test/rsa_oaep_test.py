@@ -17,4 +17,9 @@ if cmd != "gen" and cmd != "verify":
     sys.exit(0)
 
 if cmd == "gen":
-    K =
+    K = 2048
+    LEN = K // 8
+    key = RSA.generate(K)
+    kk = key.exportKey()
+    print(kk.decode("utf-8"))
+    print()
