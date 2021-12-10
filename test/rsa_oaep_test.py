@@ -23,3 +23,7 @@ if cmd == "gen":
     kk = key.exportKey()
     print(kk.decode("utf-8"))
     print()
+    pubKey = key.publickey()
+    print("E =", hex(pubKey.e))
+    n = hex(pubKey.n)
+    n = "0x" + "0
