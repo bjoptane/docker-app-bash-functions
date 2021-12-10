@@ -30,4 +30,9 @@ if cmd == "gen":
     print("N =", n)
     print()
 
-elif cmd == "veri
+elif cmd == "verify":
+    text = sys.stdin.read()
+    p = text.find("\n\n")
+    keydata = text[:p]
+    key = RSA.importKey(keydata)
+    
