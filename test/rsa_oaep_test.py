@@ -46,4 +46,8 @@ elif cmd == "verify":
     def hex_decode(hh):
         aa = [hh[i:i + 2] for i in range(0, len(hh), 2)]
         bb = [_hex2num(a[0]) * 16 + _hex2num(a[1]) for a in aa]
-        return bytes(byt
+        return bytes(bytearray(bb))
+
+    lines = text[p:].splitlines()
+    msg = [x.strip("msg:").strip() for x in lines if x .startswith("msg:")][0]
+ 
