@@ -44,4 +44,6 @@ elif cmd == "verify":
             return 10 + ord(hh) - ord('a')
 
     def hex_decode(hh):
-        aa = [hh[i:i + 2] 
+        aa = [hh[i:i + 2] for i in range(0, len(hh), 2)]
+        bb = [_hex2num(a[0]) * 16 + _hex2num(a[1]) for a in aa]
+        return bytes(byt
