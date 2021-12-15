@@ -35,4 +35,8 @@ elif cmd == "verify":
     p = text.find("\n\n")
     keydata = text[:p]
     key = RSA.importKey(keydata)
-    
+    oaepCipher = PKCS1_OAEP.new(key, SHA256)
+
+    def _hex2num(hh):
+        if hh in string.digits:
+            
