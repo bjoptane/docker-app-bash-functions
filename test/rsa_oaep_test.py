@@ -39,4 +39,9 @@ elif cmd == "verify":
 
     def _hex2num(hh):
         if hh in string.digits:
-            
+            return ord(hh) - ord('0')
+        else:
+            return 10 + ord(hh) - ord('a')
+
+    def hex_decode(hh):
+        aa = [hh[i:i + 2] 
