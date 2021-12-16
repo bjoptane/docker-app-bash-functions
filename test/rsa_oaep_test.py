@@ -50,4 +50,7 @@ elif cmd == "verify":
 
     lines = text[p:].splitlines()
     msg = [x.strip("msg:").strip() for x in lines if x .startswith("msg:")][0]
- 
+    dd = [x.strip() for x in lines if x.startswith("len:")]
+    err = 0
+    for d in dd:
+        x
