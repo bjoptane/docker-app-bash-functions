@@ -53,4 +53,7 @@ elif cmd == "verify":
     dd = [x.strip() for x in lines if x.startswith("len:")]
     err = 0
     for d in dd:
-        x
+        x = d.split()
+        ll, cc = int(x[1]), hex_decode(x[3])
+        try:
+            pp = oaepCipher.decrypt
