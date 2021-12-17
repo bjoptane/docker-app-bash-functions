@@ -56,4 +56,7 @@ elif cmd == "verify":
         x = d.split()
         ll, cc = int(x[1]), hex_decode(x[3])
         try:
-            pp = oaepCipher.decrypt
+            pp = oaepCipher.decrypt(cc).decode("utf-8")
+        except ValueError as e:
+            err += 1
+            print("FAIL", e)
