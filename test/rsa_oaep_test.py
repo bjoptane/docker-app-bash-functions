@@ -60,3 +60,8 @@ elif cmd == "verify":
         except ValueError as e:
             err += 1
             print("FAIL", e)
+            continue
+        if pp != msg[:ll]:
+            err += 1
+            print("FAIL")
+    print("E
