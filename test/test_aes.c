@@ -96,3 +96,31 @@ static void aes_ctx_test(int mode, const char* name) {
             printf("aes_init(%s | AES_DECRYPT, %ld) FAIL!\n", name, keylen);
             continue;
         }
+
+        r = aes_encrypt(&ctx_en, 16, p1, c1);
+        r = aes_encrypt(&ctx_en, 16, p1 + 16, c1 + 16);
+        if (r != 0) {
+            printf("aes_encrypt(%s, %ld) FAIL!\n", name, keylen);
+            continue;
+        }
+
+        r = aes_decrypt(&ctx_de, 32, c1, p2);
+        if (r != 0) {
+            printf("aes_decrypt(%s, %ld) FAIL!\n", name, keylen);
+            continue;
+        }
+
+        sprintf(namex, "%s K%ld", name, keylen);
+        expect_equal(namex, p1, p2, 32);
+    }
+}
+
+int main() {
+    aes_test();
+
+    aes_ctx_test(AES_ECB_MODE, "AES_ECB_MODE");
+    aes_ctx_test(AES_CBC_MODE, "AES_CBC_MODE");
+    aes_ctx_test(AES_CFB_MODE, "AES_CFB_MODE");
+    aes_ctx_test(AES_OFB_MODE, "AES_OFB_MODE");
+
+}
