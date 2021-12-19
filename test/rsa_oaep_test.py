@@ -64,4 +64,4 @@ elif cmd == "verify":
         if pp != msg[:ll]:
             err += 1
             print("FAIL")
-    print("E
+    print("ERROR:", err)
