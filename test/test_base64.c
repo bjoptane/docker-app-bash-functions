@@ -12,4 +12,8 @@ static inline uint8_t hex2num(char c) {
 
 static size_t hex_decode(const char *text, uint8_t *bin) {
     const char *p = text;
-    ui
+    uint8_t *bb   = bin;
+    do {
+        uint8_t x = hex2num(*p++);
+        uint8_t y = hex2num(*p++);
+        *bb++     = (uint8_t)
