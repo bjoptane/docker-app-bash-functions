@@ -22,4 +22,6 @@ static size_t hex_decode(const char *text, uint8_t *bin) {
 }
 
 #define NUM 1000
-char line[NUM
+char line[NUM * 2 + 8];  // reserve space for prefix and tail '\n\0'
+uint8_t binary[NUM + 4];
+uint8_t binary2[NUM + 4
