@@ -16,4 +16,10 @@ static size_t hex_decode(const char *text, uint8_t *bin) {
     do {
         uint8_t x = hex2num(*p++);
         uint8_t y = hex2num(*p++);
-        *bb++     = (uint8_t)
+        *bb++     = (uint8_t)((x << 4) | y);
+    } while (*p != '\n');
+    return (size_t)(bb - bin);
+}
+
+#define NUM 1000
+char line[NUM
