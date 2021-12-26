@@ -34,4 +34,7 @@ int main() {
         if (feof(stdin)) {
             break;
         }
-        
+        if (fgets(line, sizeof(line), stdin) == NULL) {
+            break;
+        }
+        if (line[0] == 'H') {
