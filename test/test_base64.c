@@ -38,3 +38,7 @@ int main() {
             break;
         }
         if (line[0] == 'H') {
+            cnt += 1;
+            xl1 = hex_decode(line + 2, binary);
+            xl2 = base64_encode(binary, xl1, text);
+   
