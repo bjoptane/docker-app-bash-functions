@@ -41,4 +41,6 @@ int main() {
             cnt += 1;
             xl1 = hex_decode(line + 2, binary);
             xl2 = base64_encode(binary, xl1, text);
-   
+        } else if (line[0] == 'B') {
+            size_t x = strlen(line);
+            x -= 3;  // remove head 'B ' and tai
