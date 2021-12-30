@@ -43,4 +43,9 @@ int main() {
             xl2 = base64_encode(binary, xl1, text);
         } else if (line[0] == 'B') {
             size_t x = strlen(line);
-            x -= 3;  // remove head 'B ' and tai
+            x -= 3;  // remove head 'B ' and tail '\n'
+            if (x != xl2) {
+                err1 += 1;
+                continue;
+            }
+            if (m
