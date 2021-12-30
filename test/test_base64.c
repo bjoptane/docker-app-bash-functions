@@ -48,4 +48,7 @@ int main() {
                 err1 += 1;
                 continue;
             }
-            if (m
+            if (memcmp(line + 2, text, xl2) != 0) {
+                err1 += 1;
+                continue;
+           
