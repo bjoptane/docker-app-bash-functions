@@ -55,4 +55,8 @@ int main() {
             size_t y = base64_decode(text, xl2, binary2);
             if (y != xl1) {
                 err2 += 1;
-     
+            }
+            if (memcmp(binary, binary2, xl1) != 0) {
+                err2 += 1;
+            }
+   
