@@ -59,4 +59,7 @@ int main() {
             if (memcmp(binary, binary2, xl1) != 0) {
                 err2 += 1;
             }
-   
+        }
+    }
+    printf("COUNT: %d, ERROR: %d %d\n", cnt, err1, err2);
+}
