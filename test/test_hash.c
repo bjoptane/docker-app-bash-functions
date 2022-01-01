@@ -5,4 +5,8 @@
 #include "zcrypto/sha256.h"
 #include "zcrypto/sm3.h"
 
-static void expect_equal(const char *name, const uint8_t *a, const uint8_t *b, size_t len
+static void expect_equal(const char *name, const uint8_t *a, const uint8_t *b, size_t len) {
+    if (memcmp(a, b, len) == 0) {
+        printf("%s OK!\n", name);
+    } else {
+        pr
