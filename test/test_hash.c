@@ -9,4 +9,11 @@ static void expect_equal(const char *name, const uint8_t *a, const uint8_t *b, s
     if (memcmp(a, b, len) == 0) {
         printf("%s OK!\n", name);
     } else {
-        pr
+        printf("%s FAIL!\n", name);
+    }
+}
+
+static void sm3_test() {
+    uint8_t data1[] = {'a', 'b', 'c'};
+    uint8_t digest1[32] = {
+ 
