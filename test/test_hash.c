@@ -40,3 +40,8 @@ static void sm3_test() {
     sm3_init(&ctx);
     sm3_update(&ctx, data2, 64);
     sm3_digest(&ctx, temp);
+    expect_equal("sm3 bits=512", digest2, temp, 32);
+}
+
+static void md5_test() {
+    uint8_t digest1[16] = 
