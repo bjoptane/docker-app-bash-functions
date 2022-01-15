@@ -35,4 +35,8 @@ static void sm3_test() {
     sm3_init(&ctx);
     sm3_update(&ctx, data1, 3);
     sm3_digest(&ctx, temp);
-    expect_equ
+    expect_equal("sm3 bits=24", digest1, temp, 32);
+
+    sm3_init(&ctx);
+    sm3_update(&ctx, data2, 64);
+    sm3_digest(&ctx, temp);
