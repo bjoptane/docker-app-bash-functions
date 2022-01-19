@@ -51,4 +51,6 @@ static void md5_test() {
     md5_ctx_t ctx;
     md5_init(&ctx);
     md5_digest(&ctx, temp);
-    expect_
+    expect_equal("md5 bits=0", digest1, temp, 16);
+
+    md5_update(&ctx, (const uint8_t*)"The quick brown fox jumps over the lazy dog", 43);
