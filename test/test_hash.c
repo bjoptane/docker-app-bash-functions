@@ -54,3 +54,8 @@ static void md5_test() {
     expect_equal("md5 bits=0", digest1, temp, 16);
 
     md5_update(&ctx, (const uint8_t*)"The quick brown fox jumps over the lazy dog", 43);
+    md5_digest(&ctx, temp);
+    expect_equal("md5 bits=43*8", digest2, temp, 16);
+}
+
+static void sha1_test() 
