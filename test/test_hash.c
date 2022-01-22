@@ -69,4 +69,9 @@ static void sha1_test() {
     expect_equal("sha1 bits=0", digest1, temp, 20);
 
     sha1_update(&ctx, (const uint8_t*)"The quick brown fox jumps over the lazy dog", 43);
-    sha1_digest
+    sha1_digest(&ctx, temp);
+    expect_equal("sha1 bits=43*8", digest2, temp, 20);
+}
+
+static void sha256_test() {
+ 
