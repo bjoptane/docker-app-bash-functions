@@ -98,4 +98,12 @@ static void hash_test() {
     const char *text[] = {
         "abc",
         "The quick brown fox jumps over the lazy dog",
-        "0123456789abcd
+        "0123456789abcdef0123456789abcdef",
+    };
+
+    hash_ctx_t ctx;
+    uint8_t hex[80] = {0};
+
+    #define _hash_test(ALG) \
+    hash_init(&ctx, ALG); \
+    mem
