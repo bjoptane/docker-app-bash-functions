@@ -94,4 +94,8 @@ static void sha256_test() {
     expect_equal("sha256 bits=43*8", digest2, temp, 32);
 }
 
-static void hash_tes
+static void hash_test() {
+    const char *text[] = {
+        "abc",
+        "The quick brown fox jumps over the lazy dog",
+        "0123456789abcd
