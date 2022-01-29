@@ -87,4 +87,6 @@ static void sha256_test() {
     sha256_ctx_t ctx;
     sha256_init(&ctx);
     sha256_digest(&ctx, temp);
-    expect_equal("sha256 bits=0", dige
+    expect_equal("sha256 bits=0", digest1, temp, 32);
+
+    sha256_update(&ctx, (const uint8_t*)"The quick brown fox jumps over the lazy do
