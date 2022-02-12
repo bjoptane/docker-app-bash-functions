@@ -106,4 +106,7 @@ static void hash_test() {
 
     #define _hash_test(ALG) \
     hash_init(&ctx, ALG); \
-    mem
+    memset(hex, 0, 80); \
+    hash_hexdigest(&ctx, hex); \
+    printf(#ALG " hash %s of <empty>\n", hex); \
+    for (int i = 0; 
