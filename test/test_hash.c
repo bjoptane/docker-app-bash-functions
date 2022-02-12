@@ -109,4 +109,7 @@ static void hash_test() {
     memset(hex, 0, 80); \
     hash_hexdigest(&ctx, hex); \
     printf(#ALG " hash %s of <empty>\n", hex); \
-    for (int i = 0; 
+    for (int i = 0; i < 3; ++i) { \
+        hash_init(&ctx, ALG); \
+        memset(hex, 0, 80); \
+        hash_update(&ctx, (const uin
