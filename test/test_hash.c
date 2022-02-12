@@ -112,4 +112,6 @@ static void hash_test() {
     for (int i = 0; i < 3; ++i) { \
         hash_init(&ctx, ALG); \
         memset(hex, 0, 80); \
-        hash_update(&ctx, (const uin
+        hash_update(&ctx, (const uint8_t*)text[i], strlen(text[i])); \
+        hash_hexdigest(&ctx, hex); \
+        printf(#ALG " hash %s of %s\n", hex, te
