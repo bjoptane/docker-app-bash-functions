@@ -120,4 +120,13 @@ static void hash_test() {
     _hash_test(HASH_ALG_SM3)
     _hash_test(HASH_ALG_MD5)
     _hash_test(HASH_ALG_SHA1)
-    _
+    _hash_test(HASH_ALG_SHA256)
+
+    #undef _hash_test
+
+}
+
+
+int main() {
+    sm3_test();
+    md5_
