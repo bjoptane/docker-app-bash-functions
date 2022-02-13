@@ -114,4 +114,10 @@ static void hash_test() {
         memset(hex, 0, 80); \
         hash_update(&ctx, (const uint8_t*)text[i], strlen(text[i])); \
         hash_hexdigest(&ctx, hex); \
-        printf(#ALG " hash %s of %s\n", hex, te
+        printf(#ALG " hash %s of %s\n", hex, text[i]); \
+    }
+
+    _hash_test(HASH_ALG_SM3)
+    _hash_test(HASH_ALG_MD5)
+    _hash_test(HASH_ALG_SHA1)
+    _
