@@ -93,3 +93,11 @@ int main() {
             }
 
             rsa_pri_naive(&rsa, C2, M2);
+            if (!expect_equal("rsa_pri_naive", M, M2, RSA_SIZE)) {
+                ++err2;
+            }
+            printf("%d ok\n", cnt);
+        }
+    }
+    printf("COUNT: %d, ERROR: %d %d\n", cnt, err1, err2);
+}
