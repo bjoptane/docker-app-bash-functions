@@ -57,3 +57,31 @@ int main() {
         if (fgets(line, sizeof(line), stdin) == NULL) {
             break;
         }
+        printf("%s", line);
+        if (line[0] == 'E' && line[1] == ' ' && line[2] == '=') {
+            const char *p = find_start(line);
+            rsa.E = strtoul(p, NULL, 16);
+        } else if (line[0] == 'N' && line[1] == ' ' && line[2] == '=') {
+            const char *p = find_start(line);
+            str2bignum(rsa.N, p);
+            break;
+        }
+    }
+    printf("\n");
+
+    uint8_t cipher[RSA_BYTES];
+    uint8_t text[MSG_MAX_LEN + 1];
+    srand(time(NULL));
+    for (size_t i = 0; i < MSG_MAX_LEN; ++i) {
+        text[i] = rand() % ('~' - '!' + 1) + '!';
+    }
+    text[MSG_MAX_LEN] = '\0';
+    printf("msg: %s\n\n", text);
+
+    for (int i = 0; i < 1000; ++i) {
+        size_t len = (size_t) rand() % MSG_MAX_LEN + 1;
+        rsa_pub_oaep_encrypt(&rsa, text, len, NULL, cipher);
+        printf("len: %3ld  ", len);
+        hex_dump("cipher", cipher, RSA_BYTES);
+    }
+}
