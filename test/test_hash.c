@@ -129,4 +129,8 @@ static void hash_test() {
 
 int main() {
     sm3_test();
-    md5_
+    md5_test();
+    sha1_test();
+    sha256_test();
+    hash_test();
+}
