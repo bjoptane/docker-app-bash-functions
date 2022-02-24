@@ -95,3 +95,13 @@ static void sm4_ctx_test(int mode, const char* name) {
 
     expect_equal(name, p1, p2, 32);
 }
+
+int main() {
+    sm4_test();
+
+    sm4_ctx_test(SM4_ECB_MODE, "SM4_ECB_MODE");
+    sm4_ctx_test(SM4_CBC_MODE, "SM4_CBC_MODE");
+    sm4_ctx_test(SM4_CFB_MODE, "SM4_CFB_MODE");
+    sm4_ctx_test(SM4_OFB_MODE, "SM4_OFB_MODE");
+
+}
