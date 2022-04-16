@@ -47,3 +47,10 @@ static inline uint32_t _rot_word(uint32_t x) {
     uint8_t *y = (uint8_t*)&x;
     uint8_t t = y[0];
     y[0] = y[1];
+    y[1] = y[2];
+    y[2] = y[3];
+    y[3] = t;
+    return *(uint32_t*)y;
+}
+
+static inline uint32_t _sub_word(uint32_t
