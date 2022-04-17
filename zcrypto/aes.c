@@ -62,4 +62,5 @@ static inline uint32_t _sub_word(uint32_t x) {
     return *(uint32_t*)y;
 }
 
-static void
+static void aes_set_key(const uint8_t *key, size_t keylen, int round, uint32_t *rkey) {
+    memcpy(rkey, key, ke
