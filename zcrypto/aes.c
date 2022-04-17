@@ -57,4 +57,9 @@ static inline uint32_t _sub_word(uint32_t x) {
     uint8_t *y = (uint8_t*)&x;
     y[0] = SBOX[y[0] >> 8][y[0] & 0xff];
     y[1] = SBOX[y[1] >> 8][y[1] & 0xff];
-    y[2] = 
+    y[2] = SBOX[y[2] >> 8][y[2] & 0xff];
+    y[3] = SBOX[y[3] >> 8][y[3] & 0xff];
+    return *(uint32_t*)y;
+}
+
+static void
