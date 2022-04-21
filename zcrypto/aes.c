@@ -66,4 +66,7 @@ static void aes_set_key(const uint8_t *key, size_t keylen, int round, uint32_t *
     memcpy(rkey, key, keylen);
     size_t kn = keylen / 4;
     for (size_t r = kn; r < (size_t)(round + 1) * 4; ++r) {
-   
+        if (r % kn == 0) {
+            uint32_t rcon = 0;
+            *(uint8_t*)&rcon = RCBOX[r / kn];
+            rkey[r] = rkey
