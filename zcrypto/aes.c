@@ -69,4 +69,6 @@ static void aes_set_key(const uint8_t *key, size_t keylen, int round, uint32_t *
         if (r % kn == 0) {
             uint32_t rcon = 0;
             *(uint8_t*)&rcon = RCBOX[r / kn];
-            rkey[r] = rkey
+            rkey[r] = rkey[r - kn] ^ _sub_word(_rot_word(rkey[r - 1])) ^ rcon;
+        } else if (r % kn == 4 && r > 6) {
+ 
