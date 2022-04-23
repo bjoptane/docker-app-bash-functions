@@ -73,4 +73,10 @@ static void aes_set_key(const uint8_t *key, size_t keylen, int round, uint32_t *
         } else if (r % kn == 4 && r > 6) {
             rkey[r] = rkey[r - kn] ^ _sub_word(rkey[r - 1]);
         } else {
-            rkey[r] = rkey[r - kn]
+            rkey[r] = rkey[r - kn] ^ rkey[r - 1];
+        }
+    }
+}
+
+static void add_round_key(uint8_t dst[16], const uint32_t *rkey) {
+    uint32
