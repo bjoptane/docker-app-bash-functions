@@ -79,4 +79,11 @@ static void aes_set_key(const uint8_t *key, size_t keylen, int round, uint32_t *
 }
 
 static void add_round_key(uint8_t dst[16], const uint32_t *rkey) {
-    uint32
+    uint32_t *y = (uint32_t*)dst;
+    y[0] ^= rkey[0];
+    y[1] ^= rkey[1];
+    y[2] ^= rkey[2];
+    y[3] ^= rkey[3];
+}
+
+static void sub_
