@@ -86,4 +86,8 @@ static void add_round_key(uint8_t dst[16], const uint32_t *rkey) {
     y[3] ^= rkey[3];
 }
 
-static void sub_
+static void sub_bytes(uint8_t blk[16]) {
+    for (int i = 0; i < 16; ++i) {
+        uint8_t val = blk[i];
+        blk[i] = SBOX[val >> 8][val & 0xff];
+ 
