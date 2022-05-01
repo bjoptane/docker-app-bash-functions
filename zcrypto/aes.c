@@ -95,4 +95,9 @@ static void sub_bytes(uint8_t blk[16]) {
 
 static void inv_sub_bytes(uint8_t blk[16]) {
     for (int i = 0; i < 16; ++i) {
-        uint8_t 
+        uint8_t val = blk[i];
+        blk[i] = INV_SBOX[val >> 8][val & 0xff];
+    }
+}
+
+static void shift_rows(uint8_t blk[16])
