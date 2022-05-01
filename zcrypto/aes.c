@@ -103,4 +103,7 @@ static void inv_sub_bytes(uint8_t blk[16]) {
 static void shift_rows(uint8_t blk[16]) {
     for (int i = 1; i < 4; ++i) {
         uint8_t tt[4] = {blk[i], blk[i + 4], blk[i + 8], blk[i + 12]};
-        blk[i] = tt[i]
+        blk[i] = tt[i];
+        blk[i + 4] = tt[(i + 1) % 4];
+        blk[i + 8] = tt[(i + 2) % 4];
+        blk[i + 12] = tt[(i + 3) % 
