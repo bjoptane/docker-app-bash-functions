@@ -115,4 +115,10 @@ static void inv_shift_rows(uint8_t blk[16]) {
         uint8_t tt[4] = {blk[i], blk[i + 4], blk[i + 8], blk[i + 12]};
         blk[i] = tt[4 - i];
         blk[i + 4] = tt[(5 - i) % 4];
-        blk[i + 8]
+        blk[i + 8] = tt[(6 - i) % 4];
+        blk[i + 12] = tt[(7 - i) % 4];
+    }
+}
+
+
+// static uint8_t _gmul(uint8_t v, uint
