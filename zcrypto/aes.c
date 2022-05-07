@@ -112,4 +112,7 @@ static void shift_rows(uint8_t blk[16]) {
 
 static void inv_shift_rows(uint8_t blk[16]) {
     for (int i = 1; i < 4; ++i) {
-        uint8_t tt[4] = {b
+        uint8_t tt[4] = {blk[i], blk[i + 4], blk[i + 8], blk[i + 12]};
+        blk[i] = tt[4 - i];
+        blk[i + 4] = tt[(5 - i) % 4];
+        blk[i + 8]
