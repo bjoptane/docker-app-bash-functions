@@ -126,4 +126,9 @@ static void inv_shift_rows(uint8_t blk[16]) {
 //     for (int i = 0; i < 8; ++i) {
 //         if ((n & 1) == 1) {
 //             p ^= v;
-//        
+//         }
+//         bool h = v & 0x80;
+//         v <<= 1;
+//         if (h) {
+//             v ^= 0x1b;
+//       
