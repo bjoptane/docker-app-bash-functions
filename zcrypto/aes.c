@@ -121,4 +121,9 @@ static void inv_shift_rows(uint8_t blk[16]) {
 }
 
 
-// static uint8_t _gmul(uint8_t v, uint
+// static uint8_t _gmul(uint8_t v, uint8_t n) {
+//     uint8_t p = 0;
+//     for (int i = 0; i < 8; ++i) {
+//         if ((n & 1) == 1) {
+//             p ^= v;
+//        
