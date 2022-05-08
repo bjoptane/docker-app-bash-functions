@@ -139,4 +139,6 @@ static void inv_shift_rows(uint8_t blk[16]) {
 //
 // _gmul(x, 1) == x
 // _gmul(x, 3) == _gmul(x, 2)
-// _g
+// _gmul(x, 9) == _gmul(x, 8) ^ _gmul(x, 1)
+// _gmul(x, 11) == _gmul(x, 8) ^ _gmul(x, 2) ^ _gmul(x, 1)
+// 
