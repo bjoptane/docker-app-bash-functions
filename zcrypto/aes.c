@@ -157,4 +157,6 @@ static void mix_columns(uint8_t blk[16]) {
     // | 1 1 2 3 | | b2 |
     // | 3 1 1 2 | | b3 |
 
-    // dx = _gmul(x0, 2) ^ _gmul(x1, 3) ^ _gmul(x2,
+    // dx = _gmul(x0, 2) ^ _gmul(x1, 3) ^ _gmul(x2, 1) ^ _gmul(x3, 1);
+    //    = _gmul(x0, 2) ^ _gmul(x1, 2) ^ x1 ^ x2 ^ x3;
+    //    = _gmul(x0, 2) ^ _gmul(x1,
