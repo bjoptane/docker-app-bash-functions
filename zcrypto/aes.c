@@ -153,4 +153,8 @@ static inline uint8_t _gmul2(uint8_t v) {
 
 static void mix_columns(uint8_t blk[16]) {
     // | 2 3 1 1 | | b0 |
-    // | 1 2 3 1 | |
+    // | 1 2 3 1 | | b1 |
+    // | 1 1 2 3 | | b2 |
+    // | 3 1 1 2 | | b3 |
+
+    // dx = _gmul(x0, 2) ^ _gmul(x1, 3) ^ _gmul(x2,
