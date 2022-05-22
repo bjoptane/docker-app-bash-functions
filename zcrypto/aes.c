@@ -159,4 +159,8 @@ static void mix_columns(uint8_t blk[16]) {
 
     // dx = _gmul(x0, 2) ^ _gmul(x1, 3) ^ _gmul(x2, 1) ^ _gmul(x3, 1);
     //    = _gmul(x0, 2) ^ _gmul(x1, 2) ^ x1 ^ x2 ^ x3;
-    //    = _gmul(x0, 2) ^ _gmul(x1,
+    //    = _gmul(x0, 2) ^ _gmul(x1, 2) ^ (x1 ^ x2 ^ x3 ^ x0) ^ x0;
+
+    for (int r = 0; r < 4; ++ r) {
+        uint8_t *x = blk + r * 4;
+        u
