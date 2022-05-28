@@ -172,4 +172,9 @@ static void mix_columns(uint8_t blk[16]) {
         uint8_t tt = x[0] ^ x[1] ^ x[2] ^ x[3];
         blk[r * 4 + 0] ^= g2[0] ^ g2[1] ^ tt;
         blk[r * 4 + 1] ^= g2[1] ^ g2[2] ^ tt;
-        blk[r * 4 + 2] ^= g2[2] ^ g2[3] ^ t
+        blk[r * 4 + 2] ^= g2[2] ^ g2[3] ^ tt;
+        blk[r * 4 + 3] ^= g2[3] ^ g2[0] ^ tt;
+    }
+}
+
+static void inv_mix_columns(uint8_t blk[16]
