@@ -167,4 +167,7 @@ static void mix_columns(uint8_t blk[16]) {
             _gmul2(x[0]),
             _gmul2(x[1]),
             _gmul2(x[2]),
-            _
+            _gmul2(x[3]),
+        };
+        uint8_t tt = x[0] ^ x[1] ^ x[2] ^ x[3];
+        blk[r * 4 + 0] ^= g2[0] ^ g2[
