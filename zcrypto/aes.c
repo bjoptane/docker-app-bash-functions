@@ -177,4 +177,8 @@ static void mix_columns(uint8_t blk[16]) {
     }
 }
 
-static void inv_mix_columns(uint8_t blk[16]
+static void inv_mix_columns(uint8_t blk[16]) {
+    // | 14 11 13  9 | | b0 |
+    // |  9 14 11 13 | | b1 |
+    // | 13  9 14 11 | | b2 |
+    // | 11 13  9 14 | | b3
