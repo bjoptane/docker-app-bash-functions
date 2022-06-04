@@ -181,4 +181,7 @@ static void inv_mix_columns(uint8_t blk[16]) {
     // | 14 11 13  9 | | b0 |
     // |  9 14 11 13 | | b1 |
     // | 13  9 14 11 | | b2 |
-    // | 11 13  9 14 | | b3
+    // | 11 13  9 14 | | b3 |
+
+    // dx = _gmul(x0, 14) ^ _gmul(x1, 11) ^ _gmul(x2, 13) ^ _gmul(x3, 9);
+    //    = _gmul(x0, 8) ^
