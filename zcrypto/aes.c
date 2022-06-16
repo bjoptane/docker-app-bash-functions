@@ -193,4 +193,9 @@ static void inv_mix_columns(uint8_t blk[16]) {
     for (int r = 0; r < 4; ++ r) {
         uint8_t *x = blk + r * 4;
         uint8_t g2[4] = {
-            _gmul2(x[0])
+            _gmul2(x[0]),
+            _gmul2(x[1]),
+            _gmul2(x[2]),
+            _gmul2(x[3]),
+        };
+        uint8_t gg = _gmul2(_
