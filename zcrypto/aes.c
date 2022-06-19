@@ -207,4 +207,7 @@ static void inv_mix_columns(uint8_t blk[16]) {
     }
 }
 
-void aes_blk_encrypt(const uint32_t *rkey, in
+void aes_blk_encrypt(const uint32_t *rkey, int round, const uint8_t in[16], uint8_t out[16]) {
+    memcpy(out, in, 16);
+
+    add_round_ke
