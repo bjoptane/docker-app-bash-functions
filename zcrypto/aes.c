@@ -203,4 +203,8 @@ static void inv_mix_columns(uint8_t blk[16]) {
         blk[r * 4 + 0] ^= gg ^ _gmul2(g2[0] ^ g2[2]) ^ g2[0] ^ g2[1] ^ tt;
         blk[r * 4 + 1] ^= gg ^ _gmul2(g2[1] ^ g2[3]) ^ g2[1] ^ g2[2] ^ tt;
         blk[r * 4 + 2] ^= gg ^ _gmul2(g2[2] ^ g2[0]) ^ g2[2] ^ g2[3] ^ tt;
-        blk[r * 4 
+        blk[r * 4 + 3] ^= gg ^ _gmul2(g2[3] ^ g2[1]) ^ g2[3] ^ g2[0] ^ tt;
+    }
+}
+
+void aes_blk_encrypt(const uint32_t *rkey, in
