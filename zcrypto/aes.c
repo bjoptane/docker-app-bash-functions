@@ -223,4 +223,8 @@ void aes_blk_encrypt(const uint32_t *rkey, int round, const uint8_t in[16], uint
     add_round_key(out, rkey + 4 * round);
 }
 
-void aes_blk_decrypt(const uint32_t *rkey, int round, const uint
+void aes_blk_decrypt(const uint32_t *rkey, int round, const uint8_t in[16], uint8_t out[16]) {
+    memcpy(out, in, 16);
+
+    add_round_key(out, rkey + 4 * round);
+    for (int r = round - 1; r > 
