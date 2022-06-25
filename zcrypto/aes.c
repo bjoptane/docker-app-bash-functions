@@ -215,4 +215,9 @@ void aes_blk_encrypt(const uint32_t *rkey, int round, const uint8_t in[16], uint
         sub_bytes(out);
         shift_rows(out);
         mix_columns(out);
-  
+        add_round_key(out, rkey + r * 4);
+    }
+    sub_bytes(out);
+    shift_rows(out);
+    // NO mix_columns
+    add_round_ke
