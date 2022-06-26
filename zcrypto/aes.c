@@ -235,4 +235,11 @@ void aes_blk_decrypt(const uint32_t *rkey, int round, const uint8_t in[16], uint
     }
     inv_shift_rows(out);
     inv_sub_bytes(out);
-    // no inv_mix_colu
+    // no inv_mix_columns
+    add_round_key(out, rkey);
+}
+
+
+typedef void (*block_func_t)(const uint32_t*, int, const uint8_t*, uint8_t*);
+
+st
