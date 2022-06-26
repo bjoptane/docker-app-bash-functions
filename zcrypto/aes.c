@@ -245,3 +245,7 @@ typedef void (*block_func_t)(const uint32_t*, int, const uint8_t*, uint8_t*);
 static inline void _ecb(block_func_t blk_func, const uint32_t *rkey, int rd, size_t len, const uint8_t *in, uint8_t *out) {
     for (size_t i = 0; i < len; i += 16) {
         blk_func(rkey, rd, in + i, out + i);
+    }
+}
+
+static inline void _cbc_encrypt(const uint32_t *rkey, int rd, uint8_t *iv, size_t len, const uint8_t *plain, 
