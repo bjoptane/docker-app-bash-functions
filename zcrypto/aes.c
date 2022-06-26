@@ -242,4 +242,4 @@ void aes_blk_decrypt(const uint32_t *rkey, int round, const uint8_t in[16], uint
 
 typedef void (*block_func_t)(const uint32_t*, int, const uint8_t*, uint8_t*);
 
-st
+static inline void _ecb(block_func_t blk_func, const uint32_t *rkey, int rd, size_t len, const uint8_t *in, u
