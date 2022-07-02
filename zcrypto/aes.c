@@ -251,4 +251,9 @@ static inline void _ecb(block_func_t blk_func, const uint32_t *rkey, int rd, siz
 static inline void _cbc_encrypt(const uint32_t *rkey, int rd, uint8_t *iv, size_t len, const uint8_t *plain, uint8_t *cipher) {
     for (size_t i = 0; i < len; i += 16) {
         _xor_block(iv, plain + i, 16);
-        aes_blk
+        aes_blk_encrypt(rkey, rd, iv, cipher + i);
+        memcpy(iv, cipher + i, 16);
+    }
+}
+
+static inline voi
