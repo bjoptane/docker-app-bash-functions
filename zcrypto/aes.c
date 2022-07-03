@@ -256,4 +256,5 @@ static inline void _cbc_encrypt(const uint32_t *rkey, int rd, uint8_t *iv, size_
     }
 }
 
-static inline voi
+static inline void _cbc_decrypt(const uint32_t *rkey, int rd, uint8_t *iv, size_t len, const uint8_t *cipher, uint8_t *plain) {
+    for (size_
