@@ -272,4 +272,7 @@ static inline void _cfb_encrypt(const uint32_t *rkey, int rd, uint8_t *iv, size_
     }
 }
 
-static inline void _cfb_decrypt(const uint32_t *rkey, int rd, uint8_t *iv, size_t len, const uint8_t *cipher, uint8_t *plain
+static inline void _cfb_decrypt(const uint32_t *rkey, int rd, uint8_t *iv, size_t len, const uint8_t *cipher, uint8_t *plain) {
+    for (size_t i = 0; i < len; i += 16) {
+        aes_blk_encrypt(rkey, rd, iv, plain + i);
+    
