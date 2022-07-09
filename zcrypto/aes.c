@@ -275,4 +275,9 @@ static inline void _cfb_encrypt(const uint32_t *rkey, int rd, uint8_t *iv, size_
 static inline void _cfb_decrypt(const uint32_t *rkey, int rd, uint8_t *iv, size_t len, const uint8_t *cipher, uint8_t *plain) {
     for (size_t i = 0; i < len; i += 16) {
         aes_blk_encrypt(rkey, rd, iv, plain + i);
-    
+        _xor_block(plain + i, cipher + i, 16);
+        memcpy(iv, cipher + i, 16);
+    }
+}
+
+static inline void _ofb(const uint32
