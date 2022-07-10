@@ -280,4 +280,5 @@ static inline void _cfb_decrypt(const uint32_t *rkey, int rd, uint8_t *iv, size_
     }
 }
 
-static inline void _ofb(const uint32
+static inline void _ofb(const uint32_t *rkey, int rd, uint8_t *iv, size_t len, const uint8_t *in, uint8_t *out) {
+    for (size_t i = 0; i < len; i += 1
