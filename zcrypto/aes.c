@@ -286,3 +286,8 @@ static inline void _ofb(const uint32_t *rkey, int rd, uint8_t *iv, size_t len, c
         memcpy(iv, out + i, 16);
         _xor_block(out + i, in + i, 16);
     }
+}
+
+
+#define AES_DEF_ECB(KEY, RN) \
+void aes_ ## KEY ## _ecb_encrypt(const uint8_t *key, size_t len, const uint8
