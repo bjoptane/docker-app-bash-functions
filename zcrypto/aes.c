@@ -293,4 +293,7 @@ static inline void _ofb(const uint32_t *rkey, int rd, uint8_t *iv, size_t len, c
 void aes_ ## KEY ## _ecb_encrypt(const uint8_t *key, size_t len, const uint8_t *plain, uint8_t *cipher) { \
     uint32_t rkey[RN * 4 + 4]; \
     aes_set_key(key, KEY / 8, RN, rkey); \
-    _ecb(aes
+    _ecb(aes_blk_encrypt, rkey, RN, len, plain, cipher); \
+} \
+\
+void aes_ ## KEY ## _ecb_decrypt(const uint8_t *ke
