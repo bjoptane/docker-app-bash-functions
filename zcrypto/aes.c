@@ -296,4 +296,6 @@ void aes_ ## KEY ## _ecb_encrypt(const uint8_t *key, size_t len, const uint8_t *
     _ecb(aes_blk_encrypt, rkey, RN, len, plain, cipher); \
 } \
 \
-void aes_ ## KEY ## _ecb_decrypt(const uint8_t *ke
+void aes_ ## KEY ## _ecb_decrypt(const uint8_t *key, size_t len, const uint8_t *cipher, uint8_t *plain) { \
+    uint32_t rkey[RN * 4 + 4]; \
+    aes_set_key(key, K
