@@ -303,4 +303,9 @@ void aes_ ## KEY ## _ecb_decrypt(const uint8_t *key, size_t len, const uint8_t *
 }
 
 AES_DEF_ECB(128, 10)
-AES_DEF_E
+AES_DEF_ECB(192, 12)
+AES_DEF_ECB(256, 14)
+
+
+#define AES_DEF_CBC(KEY, RN) \
+void aes_ ## KEY ## _cbc_encrypt(const uint8_t *key
