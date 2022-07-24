@@ -310,4 +310,7 @@ AES_DEF_ECB(256, 14)
 #define AES_DEF_CBC(KEY, RN) \
 void aes_ ## KEY ## _cbc_encrypt(const uint8_t *key, const uint8_t *iv, size_t len, const uint8_t *plain, uint8_t *cipher) { \
     uint32_t rkey[RN * 4 + 4]; \
-    aes
+    aes_set_key(key, KEY / 8, RN, rkey); \
+    uint8_t out[16]; \
+    memcpy(out, iv, 16); \
+    _cbc_encrypt(rkey, RN, out, le
