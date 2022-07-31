@@ -324,4 +324,10 @@ void aes_ ## KEY ## _cbc_decrypt(const uint8_t *key, const uint8_t *iv, size_t l
     _cbc_decrypt(rkey, RN, out, len, cipher, plain); \
 }
 
-AES_DEF_CBC(128
+AES_DEF_CBC(128, 10)
+AES_DEF_CBC(192, 12)
+AES_DEF_CBC(256, 14)
+
+
+#define AES_DEF_CFB(KEY, RN) \
+void aes_ ## KEY ## _cfb_en
