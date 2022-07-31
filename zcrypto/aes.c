@@ -334,4 +334,8 @@ void aes_ ## KEY ## _cfb_encrypt(const uint8_t *key, const uint8_t *iv, size_t l
     uint32_t rkey[RN * 4 + 4]; \
     aes_set_key(key, KEY / 8, RN, rkey); \
     uint8_t out[16]; \
- 
+    memcpy(out, iv, 16); \
+    _cfb_encrypt(rkey, RN, out, len, plain, cipher); \
+} \
+\
+void aes_ ## KEY ## _cfb_
