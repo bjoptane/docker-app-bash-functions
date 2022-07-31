@@ -318,4 +318,10 @@ void aes_ ## KEY ## _cbc_encrypt(const uint8_t *key, const uint8_t *iv, size_t l
 \
 void aes_ ## KEY ## _cbc_decrypt(const uint8_t *key, const uint8_t *iv, size_t len, const uint8_t *cipher, uint8_t *plain) { \
     uint32_t rkey[RN * 4 + 4]; \
-    aes_set_key(key, KEY / 8, RN, rkey); 
+    aes_set_key(key, KEY / 8, RN, rkey); \
+    uint8_t out[16]; \
+    memcpy(out, iv, 16); \
+    _cbc_decrypt(rkey, RN, out, len, cipher, plain); \
+}
+
+AES_DEF_CBC(128
