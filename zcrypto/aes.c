@@ -330,4 +330,5 @@ AES_DEF_CBC(256, 14)
 
 
 #define AES_DEF_CFB(KEY, RN) \
-void aes_ ## KEY ## _cfb_en
+void aes_ ## KEY ## _cfb_encrypt(const uint8_t *key, const uint8_t *iv, size_t len, const uint8_t *plain, uint8_t *cipher) { \
+    
