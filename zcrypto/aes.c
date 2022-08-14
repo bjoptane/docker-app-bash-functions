@@ -351,4 +351,5 @@ AES_DEF_CFB(192, 12)
 AES_DEF_CFB(256, 14)
 
 
-#define AES_DEF
+#define AES_DEF_OFB(KEY, RN) \
+void aes_ ## KEY ## _ofb_encrypt(const uint8_t *key, const uint8_t *iv, size_t len, co
