@@ -343,4 +343,12 @@ void aes_ ## KEY ## _cfb_decrypt(const uint8_t *key, const uint8_t *iv, size_t l
     aes_set_key(key, KEY / 8, RN, rkey); \
     uint8_t out[16]; \
     memcpy(out, iv, 16); \
-    _cfb_decrypt(rkey, RN, 
+    _cfb_decrypt(rkey, RN, out, len, cipher, plain); \
+}
+
+AES_DEF_CFB(128, 10)
+AES_DEF_CFB(192, 12)
+AES_DEF_CFB(256, 14)
+
+
+#define AES_DEF
