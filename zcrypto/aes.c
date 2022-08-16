@@ -355,4 +355,9 @@ AES_DEF_CFB(256, 14)
 void aes_ ## KEY ## _ofb_encrypt(const uint8_t *key, const uint8_t *iv, size_t len, const uint8_t *plain, uint8_t *cipher) { \
     uint32_t rkey[RN * 4 + 4]; \
     aes_set_key(key, KEY / 8, RN, rkey); \
-    uint8_
+    uint8_t out[16]; \
+    memcpy(out, iv, 16); \
+    _ofb(rkey, RN, out, len, plain, cipher); \
+} \
+\
+void aes_ ## KEY ## _of
