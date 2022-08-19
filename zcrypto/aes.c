@@ -360,4 +360,10 @@ void aes_ ## KEY ## _ofb_encrypt(const uint8_t *key, const uint8_t *iv, size_t l
     _ofb(rkey, RN, out, len, plain, cipher); \
 } \
 \
-void aes_ ## KEY ## _of
+void aes_ ## KEY ## _ofb_decrypt(const uint8_t *key, const uint8_t *iv, size_t len, const uint8_t *cipher, uint8_t *plain) { \
+    aes_ ## KEY ## _ofb_encrypt(key, iv, len, cipher, plain); \
+}
+
+AES_DEF_OFB(128, 10)
+AES_DEF_OFB(192, 12)
+AES_DEF_OFB(
