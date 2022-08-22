@@ -378,4 +378,11 @@ static inline int _get_round(size_t keylen) {
 #define AES_DECRYPT 0x20
 
 static inline int _round(size_t keylen) {
-    return ke
+    return keylen / 32 + 6;
+}
+
+void aes_close(aes_ctx_t *ctx) {
+    memset(ctx, 0, sizeof(aes_ctx_t));
+}
+
+int aes_init(aes_ctx_t *ct
