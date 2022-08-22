@@ -370,4 +370,12 @@ AES_DEF_OFB(256, 14)
 
 static inline int _get_round(size_t keylen) {
     int rr[] = {10, 12, 14};
-    return rr[keylen / 64 -
+    return rr[keylen / 64 - 2];
+}
+
+
+#define AES_ENCRYPT 0x10
+#define AES_DECRYPT 0x20
+
+static inline int _round(size_t keylen) {
+    return ke
