@@ -385,4 +385,5 @@ void aes_close(aes_ctx_t *ctx) {
     memset(ctx, 0, sizeof(aes_ctx_t));
 }
 
-int aes_init(aes_ctx_t *ct
+int aes_init(aes_ctx_t *ctx, uint8_t mode, size_t keylen, const uint8_t *key, const uint8_t iv[16]) {
+    if (keylen != 128 && keylen != 192 && ke
