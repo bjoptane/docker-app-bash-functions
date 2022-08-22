@@ -366,4 +366,8 @@ void aes_ ## KEY ## _ofb_decrypt(const uint8_t *key, const uint8_t *iv, size_t l
 
 AES_DEF_OFB(128, 10)
 AES_DEF_OFB(192, 12)
-AES_DEF_OFB(
+AES_DEF_OFB(256, 14)
+
+static inline int _get_round(size_t keylen) {
+    int rr[] = {10, 12, 14};
+    return rr[keylen / 64 -
