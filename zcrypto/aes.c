@@ -396,3 +396,8 @@ int aes_init(aes_ctx_t *ctx, uint8_t mode, size_t keylen, const uint8_t *key, co
         return -1;
     }
     if (mode != AES_ECB_MODE && iv == NULL) {
+        return -1;
+    }
+    ctx->keylen = keylen;
+    ctx->mode = mode;
+    aes_set_key(key, keyle
