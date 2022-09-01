@@ -400,4 +400,8 @@ int aes_init(aes_ctx_t *ctx, uint8_t mode, size_t keylen, const uint8_t *key, co
     }
     ctx->keylen = keylen;
     ctx->mode = mode;
-    aes_set_key(key, keyle
+    aes_set_key(key, keylen / 8, _round(keylen), ctx->rkey);
+    if (iv != NULL) {
+        memcpy(ctx->iv, iv, 16);
+    } else {
+        m
