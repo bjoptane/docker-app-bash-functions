@@ -404,4 +404,9 @@ int aes_init(aes_ctx_t *ctx, uint8_t mode, size_t keylen, const uint8_t *key, co
     if (iv != NULL) {
         memcpy(ctx->iv, iv, 16);
     } else {
-        m
+        memset(ctx->iv, 0, 16);
+    }
+    return 0;
+}
+
+int aes_encrypt(aes_ctx_t *ctx, size_t len, const uint8_t *plain,
