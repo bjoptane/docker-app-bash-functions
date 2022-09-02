@@ -409,4 +409,8 @@ int aes_init(aes_ctx_t *ctx, uint8_t mode, size_t keylen, const uint8_t *key, co
     return 0;
 }
 
-int aes_encrypt(aes_ctx_t *ctx, size_t len, const uint8_t *plain,
+int aes_encrypt(aes_ctx_t *ctx, size_t len, const uint8_t *plain, uint8_t *cipher) {
+    if ((ctx->mode & 0xf0) == 0) {
+        ctx->mode |= AES_ENCRYPT;
+    }
+    if ((ctx
