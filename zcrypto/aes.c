@@ -413,4 +413,9 @@ int aes_encrypt(aes_ctx_t *ctx, size_t len, const uint8_t *plain, uint8_t *ciphe
     if ((ctx->mode & 0xf0) == 0) {
         ctx->mode |= AES_ENCRYPT;
     }
-    if ((ctx
+    if ((ctx->mode & 0xf0) != AES_ENCRYPT) {
+        return -1;
+    }
+
+    int rd = _round(ctx->keylen);
+    uint8_t m = ctx-
