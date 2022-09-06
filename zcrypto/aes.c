@@ -418,4 +418,6 @@ int aes_encrypt(aes_ctx_t *ctx, size_t len, const uint8_t *plain, uint8_t *ciphe
     }
 
     int rd = _round(ctx->keylen);
-    uint8_t m = ctx-
+    uint8_t m = ctx->mode & 0x0f;
+    if (m == AES_ECB_MODE) {
+        _ecb(aes_blk_encrypt, ctx->rkey, rd, len, plain, ciphe
