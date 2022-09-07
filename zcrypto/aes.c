@@ -422,4 +422,8 @@ int aes_encrypt(aes_ctx_t *ctx, size_t len, const uint8_t *plain, uint8_t *ciphe
     if (m == AES_ECB_MODE) {
         _ecb(aes_blk_encrypt, ctx->rkey, rd, len, plain, cipher);
     } else if (m == AES_CBC_MODE) {
-        _cbc_encrypt(ctx->rkey, rd, ctx->iv, len, plain
+        _cbc_encrypt(ctx->rkey, rd, ctx->iv, len, plain, cipher);
+    } else if (m == AES_CFB_MODE) {
+        _cfb_encrypt(ctx->rkey, rd, ctx->iv, len, plain, cipher);
+    } else if (m == AES_OFB_MODE) {
+    
