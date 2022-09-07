@@ -426,4 +426,11 @@ int aes_encrypt(aes_ctx_t *ctx, size_t len, const uint8_t *plain, uint8_t *ciphe
     } else if (m == AES_CFB_MODE) {
         _cfb_encrypt(ctx->rkey, rd, ctx->iv, len, plain, cipher);
     } else if (m == AES_OFB_MODE) {
-    
+        _ofb(ctx->rkey, rd, ctx->iv, len, plain, cipher);
+    } else {
+        return -1;
+    }
+    return 0;
+}
+
+int aes_decrypt
