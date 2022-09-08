@@ -433,4 +433,5 @@ int aes_encrypt(aes_ctx_t *ctx, size_t len, const uint8_t *plain, uint8_t *ciphe
     return 0;
 }
 
-int aes_decrypt
+int aes_decrypt(aes_ctx_t *ctx, size_t len, const uint8_t *cipher, uint8_t *plain) {
+    if ((ctx->mode & 0xf0) == 0) {
