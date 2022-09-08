@@ -440,3 +440,8 @@ int aes_decrypt(aes_ctx_t *ctx, size_t len, const uint8_t *cipher, uint8_t *plai
     if ((ctx->mode & 0xf0) != AES_DECRYPT) {
         return -1;
     }
+
+    int rd = _round(ctx->keylen);
+    uint8_t m = ctx->mode & 0x0f;
+    if (m == AES_ECB_MODE) {
+        _ecb(ae
