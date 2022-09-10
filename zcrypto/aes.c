@@ -446,4 +446,6 @@ int aes_decrypt(aes_ctx_t *ctx, size_t len, const uint8_t *cipher, uint8_t *plai
     if (m == AES_ECB_MODE) {
         _ecb(aes_blk_decrypt, ctx->rkey, rd, len, cipher, plain);
     } else if (m == AES_CBC_MODE) {
-        _cbc_decrypt(ctx->rk
+        _cbc_decrypt(ctx->rkey, rd, ctx->iv, len, cipher, plain);
+    } else if (m == AES_CFB_MODE) {
+        _cfb_decrypt(ctx->rkey, rd, ctx->iv,
