@@ -451,3 +451,8 @@ int aes_decrypt(aes_ctx_t *ctx, size_t len, const uint8_t *cipher, uint8_t *plai
         _cfb_decrypt(ctx->rkey, rd, ctx->iv, len, cipher, plain);
     } else if (m == AES_OFB_MODE) {
         _ofb(ctx->rkey, rd, ctx->iv, len, cipher, plain);
+    } else {
+        return -1;
+    }
+    return 0;
+}
