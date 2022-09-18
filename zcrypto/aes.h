@@ -38,4 +38,11 @@ AES_FUNC_DEF(256)
 #define AES_CFB_MODE 3
 #define AES_OFB_MODE 4
 
-typedef struct
+typedef struct {
+    uint32_t rkey[60];
+    uint8_t iv[16];
+    size_t keylen;
+    uint8_t mode;
+} aes_ctx_t;
+
+void aes_close(a
