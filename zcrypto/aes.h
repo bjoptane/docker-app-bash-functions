@@ -28,3 +28,14 @@ AES_FUNC_DEF_HAS_IV(KEY, ofb, decrypt);
 AES_FUNC_DEF(128)
 
 AES_FUNC_DEF(192)
+
+AES_FUNC_DEF(256)
+
+
+
+#define AES_ECB_MODE 1
+#define AES_CBC_MODE 2
+#define AES_CFB_MODE 3
+#define AES_OFB_MODE 4
+
+typedef struct
