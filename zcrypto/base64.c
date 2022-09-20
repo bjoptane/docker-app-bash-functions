@@ -35,3 +35,72 @@ size_t base64_encode(const void *bin, size_t len, void *text) {
     uint8_t *tt0 = (uint8_t *)(text);
     uint8_t *tt  = tt0;
     for (size_t n = len / 3; n--;) {
+        *tt++ = ASCII[(bb[0] & 0xfcu) >> 2u];
+        *tt++ = ASCII[((bb[0] & 0x03u) << 4u) + ((bb[1] & 0xf0u) >> 4u)];
+        *tt++ = ASCII[((bb[2] & 0xc0u) >> 6u) + ((bb[1] & 0x0fu) << 2u)];
+        *tt++ = ASCII[bb[2] & 0x3fu];
+        bb += 3;
+    }
+
+    switch (len % 3) {
+        case 2:
+            *tt++ = ASCII[(bb[0] & 0xfcu) >> 2u];
+            *tt++ = ASCII[((bb[0] & 0x03u) << 4u) + ((bb[1] & 0xf0u) >> 4u)];
+            *tt++ = ASCII[(bb[1] & 0x0fu) << 2u];
+            *tt++ = '=';
+            break;
+
+        case 1:
+            *tt++ = ASCII[(bb[0] & 0xfcu) >> 2u];
+            *tt++ = ASCII[((bb[0] & 0x03u) << 4u)];
+            *tt++ = '=';
+            *tt++ = '=';
+            break;
+
+        case 0:
+            break;
+    }
+    return (size_t)(tt - tt0);
+}
+
+size_t base64_decode(const void *text, size_t len, void *bin) {
+    uint8_t *bb0 = (uint8_t *)(bin);
+    uint8_t *bb  = bb0;
+    //
+    const uint8_t *tt0 = (const uint8_t *)(text);
+    const uint8_t *end = tt0 + (len / 4) * 4;
+    const uint8_t *tt  = tt0;
+    for (; tt < end; tt += 4) {
+        uint8_t c4[] = {
+            BIN[tt[0]],
+            BIN[tt[1]],
+            BIN[tt[2]],
+            BIN[tt[3]],
+        };
+        if ((c4[0] | c4[1] | c4[2] | c4[3]) == 0xffu) {
+            break;
+        }
+
+        *bb++ = (((c4[0] & 0xffu) << 2u) + ((c4[1] & 0x30u) >> 4u));
+        *bb++ = ((c4[1] & 0xfu) << 4u) + ((c4[2] & 0x3cu) >> 2u);
+        *bb++ = ((c4[2] & 0x3u) << 6u) + c4[3];
+    }
+    if (tt == end) {
+        return (size_t)(bb - bb0);
+    }
+    uint8_t c4[4];
+    c4[0] = BIN[tt[0]];
+    c4[1] = BIN[tt[1]];
+    c4[2] = tt[2] == '=' ? 0u : BIN[tt[2]];
+    c4[3] = tt[3] == '=' ? 0u : BIN[tt[3]];
+    if ((c4[0] | c4[1] | c4[2] | c4[3]) == 0xffu) {
+        // ERROR
+        return (size_t)(bb - bb0);
+    }
+    *bb++ = (((c4[0] & 0xffu) << 2u) + ((c4[1] & 0x30u) >> 4u));
+    if (tt[2] == '=') {
+        return (size_t)(bb - bb0);
+    }
+    *bb++ = ((c4[1] & 0xfu) << 4u) + ((c4[2] & 0x3cu) >> 2u);
+    return (size_t)(bb - bb0);
+}
