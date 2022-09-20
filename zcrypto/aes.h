@@ -47,3 +47,5 @@ typedef struct {
 
 void aes_close(aes_ctx_t *ctx);
 int aes_init(aes_ctx_t *ctx, uint8_t mode, size_t keylen, const uint8_t *key, const uint8_t iv[16]);
+int aes_encrypt(aes_ctx_t *ctx, size_t len, const uint8_t *plain, uint8_t *cipher);
+int aes_decrypt(aes_ctx_t *ctx, size_t len, con
