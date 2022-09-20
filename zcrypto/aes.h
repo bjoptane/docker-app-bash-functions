@@ -45,4 +45,5 @@ typedef struct {
     uint8_t mode;
 } aes_ctx_t;
 
-void aes_close(a
+void aes_close(aes_ctx_t *ctx);
+int aes_init(aes_ctx_t *ctx, uint8_t mode, size_t keylen, const uint8_t *key, const uint8_t iv[16]);
