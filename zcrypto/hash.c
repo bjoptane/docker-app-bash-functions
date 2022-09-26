@@ -8,4 +8,9 @@ void _hash_update(hash_blk_update_func blk_update, uint32_t *hash, uint8_t *blk,
         memcpy(blk + offset, data, len);
         *total += len;
         return;
-    
+    }
+
+    const uint8_t *end = data + len;
+    const uint8_t *p   = data;
+    if (offset != 0) {
+        mem
