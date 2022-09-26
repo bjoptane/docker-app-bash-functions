@@ -13,4 +13,6 @@ void _hash_update(hash_blk_update_func blk_update, uint32_t *hash, uint8_t *blk,
     const uint8_t *end = data + len;
     const uint8_t *p   = data;
     if (offset != 0) {
-        mem
+        memcpy(blk + offset, p, HASH_BLK_SIZE - offset);
+        blk_update(hash, blk);
+        p += HASH_BLK_SIZE - offse
