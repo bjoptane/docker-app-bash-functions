@@ -15,4 +15,10 @@ void _hash_update(hash_blk_update_func blk_update, uint32_t *hash, uint8_t *blk,
     if (offset != 0) {
         memcpy(blk + offset, p, HASH_BLK_SIZE - offset);
         blk_update(hash, blk);
-        p += HASH_BLK_SIZE - offse
+        p += HASH_BLK_SIZE - offset;
+    }
+    for (; p + HASH_BLK_SIZE <= end; p += HASH_BLK_SIZE) {
+        blk_update(hash, p);
+    }
+    if (p < end) {
+     
