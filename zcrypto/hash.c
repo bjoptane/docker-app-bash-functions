@@ -21,4 +21,9 @@ void _hash_update(hash_blk_update_func blk_update, uint32_t *hash, uint8_t *blk,
         blk_update(hash, p);
     }
     if (p < end) {
-     
+        memcpy(blk, p, (size_t)(end - p));
+    }
+    *total += len;
+}
+
+#define BLK_DATA_SZIE (HASH_BLK_SIZE - 8
