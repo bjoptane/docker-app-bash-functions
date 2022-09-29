@@ -26,4 +26,8 @@ void _hash_update(hash_blk_update_func blk_update, uint32_t *hash, uint8_t *blk,
     *total += len;
 }
 
-#define BLK_DATA_SZIE (HASH_BLK_SIZE - 8
+#define BLK_DATA_SZIE (HASH_BLK_SIZE - 8)
+
+static void hash_store_len(uint64_t len, uint8_t data[8], bool le) {
+    if (le) {
+        _hash_store_len(le, l
