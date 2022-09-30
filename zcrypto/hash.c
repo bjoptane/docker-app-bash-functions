@@ -30,4 +30,10 @@ void _hash_update(hash_blk_update_func blk_update, uint32_t *hash, uint8_t *blk,
 
 static void hash_store_len(uint64_t len, uint8_t data[8], bool le) {
     if (le) {
-        _hash_store_len(le, l
+        _hash_store_len(le, len, data);
+    } else {
+        _hash_store_len(be, len, data);
+    }
+}
+
+void _hash_done(hash_blk_update_func blk_upda
