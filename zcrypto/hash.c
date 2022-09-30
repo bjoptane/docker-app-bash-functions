@@ -36,4 +36,6 @@ static void hash_store_len(uint64_t len, uint8_t data[8], bool le) {
     }
 }
 
-void _hash_done(hash_blk_update_func blk_upda
+void _hash_done(hash_blk_update_func blk_update, uint32_t *hash, const uint8_t *data, uint64_t total, bool le) {
+    uint8_t blk[HASH_BLK_SIZE];
+    me
