@@ -41,4 +41,9 @@ void _hash_done(hash_blk_update_func blk_update, uint32_t *hash, const uint8_t *
     memset(blk, 0, HASH_BLK_SIZE);
     size_t len = total % HASH_BLK_SIZE;
     if (len > 0) {
-        memcpy(blk, da
+        memcpy(blk, data, len);
+    }
+
+    blk[len] = 0x80;
+    if (len < BLK_DATA_SZIE) {
+        hash_store_len(total, blk + BLK_DATA_SZIE, 
