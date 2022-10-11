@@ -46,4 +46,8 @@ void _hash_done(hash_blk_update_func blk_update, uint32_t *hash, const uint8_t *
 
     blk[len] = 0x80;
     if (len < BLK_DATA_SZIE) {
-        hash_store_len(total, blk + BLK_DATA_SZIE, 
+        hash_store_len(total, blk + BLK_DATA_SZIE, le);
+        blk_update(hash, blk);
+    } else {
+        blk_update(hash, blk);
+        memset(blk, 0, HASH_
