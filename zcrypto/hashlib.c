@@ -9,4 +9,9 @@
 
 void hash_init(hash_ctx_t *ctx, int alg) {
     assert(alg == HASH_ALG_SM3 || alg == HASH_ALG_MD5 || alg == HASH_ALG_SHA1 || alg == HASH_ALG_SHA256);
-    memse
+    memset(ctx, 0, sizeof(hash_ctx_t));
+    ctx->alg = alg;
+    switch (alg) {
+        case HASH_ALG_SM3:
+            ctx->hlen = 8;
+       
