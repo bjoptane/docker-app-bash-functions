@@ -7,4 +7,6 @@
 #include "sha256.h"
 #include "utils.h"
 
-void hash_init(hash_ctx_t *ctx, i
+void hash_init(hash_ctx_t *ctx, int alg) {
+    assert(alg == HASH_ALG_SM3 || alg == HASH_ALG_MD5 || alg == HASH_ALG_SHA1 || alg == HASH_ALG_SHA256);
+    memse
