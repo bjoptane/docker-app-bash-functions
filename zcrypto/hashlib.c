@@ -14,4 +14,7 @@ void hash_init(hash_ctx_t *ctx, int alg) {
     switch (alg) {
         case HASH_ALG_SM3:
             ctx->hlen = 8;
-       
+            sm3_hash_init(ctx->hash);
+            break;
+        case HASH_ALG_MD5:
+            ctx->hlen 
