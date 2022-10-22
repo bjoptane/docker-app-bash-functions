@@ -31,4 +31,8 @@ void hash_init(hash_ctx_t *ctx, int alg) {
     }
 }
 
-static const hash_blk_upd
+static const hash_blk_update_func BLK_UPDATE_FUNCS[] = {
+    NULL,
+    sm3_blk_update,
+    md5_blk_update,
+    sha1_blk_upd
