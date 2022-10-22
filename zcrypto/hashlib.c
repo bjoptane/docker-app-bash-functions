@@ -17,4 +17,8 @@ void hash_init(hash_ctx_t *ctx, int alg) {
             sm3_hash_init(ctx->hash);
             break;
         case HASH_ALG_MD5:
-            ctx->hlen 
+            ctx->hlen = 4;
+            md5_hash_init(ctx->hash);
+            break;
+        case HASH_ALG_SHA1:
+            
