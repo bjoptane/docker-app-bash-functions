@@ -40,4 +40,8 @@ static const hash_blk_update_func BLK_UPDATE_FUNCS[] = {
 };
 
 void hash_update(hash_ctx_t *ctx, const uint8_t *data, size_t len) {
-    hash_blk_update_fu
+    hash_blk_update_func update = BLK_UPDATE_FUNCS[ctx->alg];
+    _hash_update(update, ctx->hash, ctx->blk, data, len, &ctx->len);
+}
+
+void has
