@@ -25,4 +25,10 @@ void hash_init(hash_ctx_t *ctx, int alg) {
             sha1_hash_init(ctx->hash);
             break;
         case HASH_ALG_SHA256:
-          
+            ctx->hlen = 8;
+            sha256_hash_init(ctx->hash);
+            break;
+    }
+}
+
+static const hash_blk_upd
