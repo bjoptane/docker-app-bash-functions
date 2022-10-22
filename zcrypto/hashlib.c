@@ -21,4 +21,8 @@ void hash_init(hash_ctx_t *ctx, int alg) {
             md5_hash_init(ctx->hash);
             break;
         case HASH_ALG_SHA1:
-            
+            ctx->hlen = 5;
+            sha1_hash_init(ctx->hash);
+            break;
+        case HASH_ALG_SHA256:
+          
