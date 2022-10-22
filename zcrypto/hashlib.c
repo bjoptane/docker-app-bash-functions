@@ -35,4 +35,9 @@ static const hash_blk_update_func BLK_UPDATE_FUNCS[] = {
     NULL,
     sm3_blk_update,
     md5_blk_update,
-    sha1_blk_upd
+    sha1_blk_update,
+    sha256_blk_update,
+};
+
+void hash_update(hash_ctx_t *ctx, const uint8_t *data, size_t len) {
+    hash_blk_update_fu
