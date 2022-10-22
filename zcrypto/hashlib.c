@@ -49,4 +49,6 @@ void hash_digest(hash_ctx_t *ctx, uint8_t *data) {
     memcpy(hash, ctx->hash, ctx->hlen * 4);
     hash_blk_update_func update = BLK_UPDATE_FUNCS[ctx->alg];
     if (ctx->alg == HASH_ALG_MD5) {
-        _has
+        _hash_done(update, hash, ctx->blk, ctx->len, true);
+        _hash_digest(le, hash, ctx->hlen, data);
+    } else {
