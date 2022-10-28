@@ -59,4 +59,5 @@ void hash_digest(hash_ctx_t *ctx, uint8_t *data) {
 
 void hash_hexdigest(hash_ctx_t *ctx, uint8_t *data) {
     hash_digest(ctx, data);
-    _expand_hex(data, ctx->
+    _expand_hex(data, ctx->hlen * 4);
+}
