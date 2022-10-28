@@ -54,4 +54,9 @@ void hash_digest(hash_ctx_t *ctx, uint8_t *data) {
     } else {
         _hash_done(update, hash, ctx->blk, ctx->len, false);
         _hash_digest(be, hash, ctx->hlen, data);
- 
+    }
+}
+
+void hash_hexdigest(hash_ctx_t *ctx, uint8_t *data) {
+    hash_digest(ctx, data);
+    _expand_hex(data, ctx->
