@@ -8,4 +8,10 @@ extern "C" {
 #include <string.h>
 
 typedef struct {
-    uint
+    uint64_t len;
+    uint32_t hash[4];
+    uint8_t blk[64];
+} md5_ctx_t;
+
+void md5_init(md5_ctx_t *ctx);
+void md5_updat
