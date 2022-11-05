@@ -14,4 +14,6 @@ typedef struct {
 } md5_ctx_t;
 
 void md5_init(md5_ctx_t *ctx);
-void md5_updat
+void md5_update(md5_ctx_t *ctx, const uint8_t *data, size_t len);
+void md5_digest(md5_ctx_t *ctx, uint8_t *data);
+void md5_h
