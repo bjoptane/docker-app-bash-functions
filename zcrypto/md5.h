@@ -19,4 +19,8 @@ void md5_digest(md5_ctx_t *ctx, uint8_t *data);
 void md5_hexdigest(md5_ctx_t *ctx, uint8_t *data);
 
 void md5_hash_init(uint32_t hash[4]);
-void md5_blk_update(uint32_t hash[4], const uint8_t b
+void md5_blk_update(uint32_t hash[4], const uint8_t blk[64]);
+
+# ifdef __cplusplus
+}
+# endif
