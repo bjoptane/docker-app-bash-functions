@@ -74,3 +74,48 @@ OAEP padding: https://tools.ietf.org/html/rfc8017
                |                   |
       +--+     V                   |
       |00|    xor <----- MGF <-----|
+      +--+     |                   |
+        |      |                   |
+        V      V                   V
+      +--+----------+----------------------------+
+EM =  |00|maskedSeed|          maskedDB          |
+      +--+----------+----------------------------+
+
+* NOTICE: you has to ensure that message length <= MSG_MAX_LEN
+* NOTICE: you has to call `srand` yourself to set rand seed
+*/
+static void padding(uint8_t EM[RSA_BYTES], const uint8_t *text, size_t len, const char* label) {
+    memset(EM, 0, RSA_BYTES);
+    uint8_t seed[HASH_BYTES];
+    uint8_t dbmask[RSA_BYTES - HASH_BYTES - 1];
+    for (size_t i = 0; i < HASH_BYTES; ++i) {
+        seed[i] = (uint8_t) (rand() & 0xff);
+    }
+    mgf1(dbmask, RSA_BYTES - HASH_BYTES - 1, seed, HASH_BYTES);
+
+    if (label == NULL) {
+        memcpy(EM + HASH_BYTES + 1, EMPTY_LABLE_HASH, HASH_BYTES);
+    } else {
+        sha256_ctx_t ctx;
+        sha256_init(&ctx);
+        sha256_update(&ctx, (const uint8_t*)label, strlen(label));
+        sha256_digest(&ctx, EM + HASH_BYTES + 1);
+    }
+    EM[RSA_BYTES - len - 1] = 0x01;
+    memcpy(EM + RSA_BYTES - len, text, len);
+
+    _xor(EM + HASH_BYTES + 1, dbmask, RSA_BYTES - HASH_BYTES - 1);
+    mgf1(EM + 1, HASH_BYTES, EM + HASH_BYTES + 1, RSA_BYTES - HASH_BYTES - 1);
+    _xor(EM + 1, seed, HASH_BYTES);
+}
+
+
+void rsa_pub_oaep_encrypt(const rsa_ctx_t *ctx, const uint8_t *msg, size_t len, const char *label, uint8_t cipher[RSA_BYTES]) {
+    uint32_t P[RSA_SIZE];
+    uint32_t C[RSA_SIZE];
+    uint8_t EM[RSA_BYTES];
+    padding(EM, msg, len, label);
+    bytes2num(P, EM, RSA_BYTES);
+    rsa_pub_naive(ctx, P, C);
+    num2bytes(cipher, C, RSA_SIZE);
+}
