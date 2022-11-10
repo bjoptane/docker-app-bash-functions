@@ -65,3 +65,36 @@ void sha1_blk_update(uint32_t hash[5], const uint8_t data[64]) {
     hash[0] += A;
     hash[1] += B;
     hash[2] += C;
+    hash[3] += D;
+    hash[4] += E;
+}
+
+void sha1_hash_init(uint32_t hash[5]) {
+    hash[0] = 0x67452301ul;
+    hash[1] = 0xefcdab89ul;
+    hash[2] = 0x98badcfeul;
+    hash[3] = 0x10325476ul;
+    hash[4] = 0xc3d2e1f0ul;
+}
+
+
+void sha1_init(sha1_ctx_t *ctx) {
+    memset(ctx, 0, sizeof(sha1_ctx_t));
+    sha1_hash_init(ctx->hash);
+}
+
+void sha1_update(sha1_ctx_t *ctx, const uint8_t *data, size_t len) {
+    _hash_update(sha1_blk_update, ctx->hash, ctx->blk, data, len, &ctx->len);
+}
+
+void sha1_digest(sha1_ctx_t *ctx, uint8_t *data) {
+    uint32_t hash[5];
+    memcpy(hash, ctx->hash, 20);
+    _hash_done(sha1_blk_update, hash, ctx->blk, ctx->len, false);
+    _hash_digest(be, hash, 5, data);
+}
+
+void sha1_hexdigest(sha1_ctx_t *ctx, uint8_t *data) {
+    sha1_digest(ctx, data);
+    _expand_hex(data, 20);
+}
