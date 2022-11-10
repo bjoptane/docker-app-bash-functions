@@ -170,3 +170,110 @@ static void _modx(uint32_t *X, const uint32_t *C, const uint32_t *A) {
 
 static void _montgomery(uint32_t X[RSA_SIZE], const uint32_t C[RSA_SIZE], const uint32_t A[RSA_SIZE], const uint32_t B[RSA_SIZE], uint32_t m) {
     uint32_t tempx[RSA_SIZE * 2 + 2];
+    _zeros(tempx, RSA_SIZE * 2 + 2);
+    uint32_t dd[RSA_SIZE + 1];
+    _zeros(dd, RSA_SIZE + 1);
+    uint32_t *px = tempx;
+    _debug("A", A, RSA_SIZE);
+    _debug("C", C, RSA_SIZE);
+
+    uint32_t mm = UINT32_MAX - m + 1;
+    for (size_t i = 0; i < RSA_SIZE; ++i) {
+        // dd = A * B[i] + C * q; dd[0] == 0; m * C == 1 (mod R); R = 2^32
+        // => dd[0] = A[0]*B[i] + C*q == 0 (mod R)
+        // => C*q = -A[0]*B[i] (mod R)
+        // => q = -m*A[0]*B[i] (mod R)
+        // => q = (R - m)*A[0]*B[i] (mod R)
+        uint32_t q = (A[0] * B[i] + px[0]) * mm;
+
+        _copy(dd, C, RSA_SIZE);
+        _mul1(dd, q, RSA_SIZE);
+        _add(px, dd, RSA_SIZE + 1);
+
+        _copy(dd, A, RSA_SIZE);
+        _mul1(dd, B[i], RSA_SIZE);
+        _add(px, dd, RSA_SIZE + 1);
+
+        // _debug("px", px, RSA_SIZE + 1);
+        ++px;
+    }
+    _debug("px", px, RSA_SIZE + 2);
+    _mod(px, RSA_SIZE + 2, C, RSA_SIZE);
+    _copy(X, px, RSA_SIZE);
+    _debug("X", X, RSA_SIZE);
+}
+
+static inline void _swap(uint32_t **px, uint32_t **py) {
+    uint32_t *pz = *px;
+    *px = *py;
+    *py = pz;
+}
+
+static inline int _highest_bit_idx(uint32_t x) {
+    for (int i = 31; i > 0; --i) {
+        if (x >> i) {
+            return i;
+        }
+    }
+    return 0;
+}
+
+// x = a^(-1) mod 2^32
+static uint32_t _inv(uint32_t a) {
+    int64_t r0 = (int64_t)1u << 32;
+    int64_t r1 = a;
+    int64_t t0 = 0, t1 = 1;
+    while (r1 != 0) {
+        int64_t q = r0 / r1;
+        int64_t temp = t1;
+        temp = t1;
+        t1 = t0 - q * t1;
+        t0 = temp;
+
+        temp = r1;
+        r1 = r0 - q * r1;
+        r0 = temp;
+    }
+    if (r1 > 1) {
+        return 0;
+    }
+    if (t0 < 0) {
+        t0 += (int64_t)1u << 32;
+    }
+    return (uint32_t)t0;
+}
+
+
+static void _exp_mod(uint32_t X[RSA_SIZE], const uint32_t C[RSA_SIZE], const uint32_t A[RSA_SIZE], const uint32_t B[], int blen) {
+    _debug("A", A, RSA_SIZE);
+    _debug("C", C, RSA_SIZE);
+    uint32_t tempA[RSA_SIZE];
+    _modx(tempA, C, A);
+    _debug("tempA", tempA, RSA_SIZE);
+
+    uint32_t tempx[RSA_SIZE];
+    uint32_t *px = tempx;
+    _copy(px, tempA, RSA_SIZE);
+
+    uint32_t tempy[RSA_SIZE];
+    uint32_t *py = tempy;
+    // _zeros(py, RSA_SIZE);
+
+    uint32_t m = _inv(C[0]);
+
+    int idx = 0;
+    for (int j = blen - 1; j >= 0; --j) {
+        if (B[j] != 0) {
+            idx = _highest_bit_idx(B[j]) + j * 32;
+            break;
+        }
+    }
+    for (int i = idx - 1; i >= 0; --i) {
+        _montgomery(py, C, px, px, m);
+        _swap(&px, &py);
+
+        int j = i / 32;
+        int k = i % 32;
+        if ((B[j] >> k) & 0x1) {
+            _montgomery(py, C, px, tempA, m);
+            _swap(&px, &py);
