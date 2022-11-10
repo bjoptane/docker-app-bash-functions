@@ -277,3 +277,20 @@ static void _exp_mod(uint32_t X[RSA_SIZE], const uint32_t C[RSA_SIZE], const uin
         if ((B[j] >> k) & 0x1) {
             _montgomery(py, C, px, tempA, m);
             _swap(&px, &py);
+        }
+    }
+    _zeros(py, RSA_SIZE);
+    py[0] = 1u;
+    _montgomery(X, C, px, py, m);
+}
+
+void rsa_pub_naive(const rsa_ctx_t *ctx, const uint32_t data[RSA_SIZE], uint32_t output[RSA_SIZE]) {
+    uint32_t B[1] = {ctx->E};
+    _exp_mod(output, ctx->N, data, B, 1);
+}
+
+#if ENABLE_RSA_PRIVATE_KEY
+void rsa_pri_naive(const rsa_ctx_t *ctx, const uint32_t data[RSA_SIZE], uint32_t output[RSA_SIZE]) {
+    _exp_mod(output, ctx->N, data, ctx->D, RSA_SIZE);
+}
+#endif
