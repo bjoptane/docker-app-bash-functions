@@ -7,4 +7,10 @@ extern "C" {
 #include <stdint.h>
 #include <string.h>
 
-typ
+typedef struct {
+    uint64_t len;
+    uint32_t hash[5];
+    uint8_t blk[64];
+} sha1_ctx_t;
+
+void sha1_init
