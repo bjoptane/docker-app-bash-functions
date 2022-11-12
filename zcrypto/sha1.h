@@ -15,4 +15,8 @@ typedef struct {
 
 void sha1_init(sha1_ctx_t *ctx);
 void sha1_update(sha1_ctx_t *ctx, const uint8_t *data, size_t len);
-void sha1_digest(sh
+void sha1_digest(sha1_ctx_t *ctx, uint8_t *data);
+void sha1_hexdigest(sha1_ctx_t *ctx, uint8_t *data);
+
+void sha1_hash_init(uint32_t hash[5]);
+void sha1_
