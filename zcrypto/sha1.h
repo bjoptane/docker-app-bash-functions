@@ -19,4 +19,8 @@ void sha1_digest(sha1_ctx_t *ctx, uint8_t *data);
 void sha1_hexdigest(sha1_ctx_t *ctx, uint8_t *data);
 
 void sha1_hash_init(uint32_t hash[5]);
-void sha1_
+void sha1_blk_update(uint32_t hash[5], const uint8_t blk[64]);
+
+# ifdef __cplusplus
+}
+# endif
