@@ -7,4 +7,8 @@ static inline uint32_t CH(uint32_t X, uint32_t Y, uint32_t Z) {
 }
 
 static inline uint32_t MAJ(uint32_t X, uint32_t Y, uint32_t Z) {
-    return (
+    return (X & Y) ^ (X & Z) ^ (Y & Z);
+}
+
+static inline uint32_t BSIG0(uint32_t X) {
+    return _rshift(X, 2) ^ _rshift(X, 13)
