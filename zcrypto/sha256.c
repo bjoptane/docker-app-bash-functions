@@ -19,4 +19,8 @@ static inline uint32_t BSIG1(uint32_t X) {
 }
 
 static inline uint32_t SSIG0(uint32_t X) {
-    return _rshift(X, 7) ^ _rshift(X, 18) ^ (X
+    return _rshift(X, 7) ^ _rshift(X, 18) ^ (X >> 3);
+}
+
+static inline uint32_t SSIG1(uint32_t X) {
+    return _rshift(X, 17) ^ _rshift(X, 19) ^ (X >>
