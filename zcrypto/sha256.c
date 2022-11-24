@@ -23,4 +23,9 @@ static inline uint32_t SSIG0(uint32_t X) {
 }
 
 static inline uint32_t SSIG1(uint32_t X) {
-    return _rshift(X, 17) ^ _rshift(X, 19) ^ (X >>
+    return _rshift(X, 17) ^ _rshift(X, 19) ^ (X >> 10);
+}
+
+static const uint32_t K[] = {
+    0x428a2f98ul, 0x71374491ul, 0xb5c0fbcful, 0xe9b5dba5ul,
+    0x3956c25bul, 0x59f111f1ul,
