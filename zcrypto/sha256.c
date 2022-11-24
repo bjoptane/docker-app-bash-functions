@@ -28,4 +28,6 @@ static inline uint32_t SSIG1(uint32_t X) {
 
 static const uint32_t K[] = {
     0x428a2f98ul, 0x71374491ul, 0xb5c0fbcful, 0xe9b5dba5ul,
-    0x3956c25bul, 0x59f111f1ul,
+    0x3956c25bul, 0x59f111f1ul, 0x923f82a4ul, 0xab1c5ed5ul,
+    0xd807aa98ul, 0x12835b01ul, 0x243185beul, 0x550c7dc3ul,
+    0x72be5d74ul, 0x80deb
