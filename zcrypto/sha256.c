@@ -42,4 +42,7 @@ static const uint32_t K[] = {
     0x19a4c116ul, 0x1e376c08ul, 0x2748774cul, 0x34b0bcb5ul,
     0x391c0cb3ul, 0x4ed8aa4aul, 0x5b9cca4ful, 0x682e6ff3ul,
     0x748f82eeul, 0x78a5636ful, 0x84c87814ul, 0x8cc70208ul,
-    0x90befffaul,
+    0x90befffaul, 0xa4506cebul, 0xbef9a3f7ul, 0xc67178f2ul,
+};
+
+void sha256_blk_update(uint32_t hash[8], const uint8_t data[64]) {
