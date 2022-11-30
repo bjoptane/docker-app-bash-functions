@@ -46,3 +46,8 @@ static const uint32_t K[] = {
 };
 
 void sha256_blk_update(uint32_t hash[8], const uint8_t data[64]) {
+    uint32_t W[64];
+    for (int i = 0; i < 16; ++i) {
+        W[i] = _load_be_u32(data + i * 4);
+    }
+    for
