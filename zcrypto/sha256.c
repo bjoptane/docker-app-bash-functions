@@ -50,4 +50,7 @@ void sha256_blk_update(uint32_t hash[8], const uint8_t data[64]) {
     for (int i = 0; i < 16; ++i) {
         W[i] = _load_be_u32(data + i * 4);
     }
-    for
+    for (int i = 16; i < 64; ++i) {
+        W[i] = SSIG1(W[i - 2]) + W[i - 7] + SSIG0(W[i - 15]) + W[i - 16];
+    }
+    uint32_t A = 
