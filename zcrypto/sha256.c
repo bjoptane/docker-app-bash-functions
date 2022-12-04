@@ -62,4 +62,6 @@ void sha256_blk_update(uint32_t hash[8], const uint8_t data[64]) {
     uint32_t G = hash[6];
     uint32_t H = hash[7];
 
-    for (int 
+    for (int i = 0; i < 64; ++i) {
+        uint32_t t1 = H + BSIG1(E) + CH(E, F, G) + K[i] + W[i];
+        
