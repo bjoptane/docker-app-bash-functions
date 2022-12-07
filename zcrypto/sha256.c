@@ -86,4 +86,7 @@ void sha256_blk_update(uint32_t hash[8], const uint8_t data[64]) {
 }
 
 void sha256_hash_init(uint32_t hash[8]) {
-    h
+    hash[0] = 0x6a09e667ul;
+    hash[1] = 0xbb67ae85ul;
+    hash[2] = 0x3c6ef372ul;
+    hash[3] = 0xa54ff53
