@@ -71,4 +71,12 @@ void sha256_blk_update(uint32_t hash[8], const uint8_t data[64]) {
         E = D + t1;
         D = C;
         C = B;
-   
+        B = A;
+        A = t1 + t2;
+    }
+
+    hash[0] += A;
+    hash[1] += B;
+    hash[2] += C;
+    hash[3] += D;
+    h
