@@ -99,4 +99,8 @@ void sha256_hash_init(uint32_t hash[8]) {
 
 void sha256_init(sha256_ctx_t *ctx) {
     memset(ctx, 0, sizeof(sha256_ctx_t));
-    
+    sha256_hash_init(ctx->hash);
+}
+
+void sha256_update(sha256_ctx_t *ctx, const uint8_t *data, size_t len) {
+    _hash_up
