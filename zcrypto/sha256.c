@@ -93,4 +93,10 @@ void sha256_hash_init(uint32_t hash[8]) {
     hash[4] = 0x510e527ful;
     hash[5] = 0x9b05688cul;
     hash[6] = 0x1f83d9abul;
-    hash[7] 
+    hash[7] = 0x5be0cd19ul;
+}
+
+
+void sha256_init(sha256_ctx_t *ctx) {
+    memset(ctx, 0, sizeof(sha256_ctx_t));
+    
