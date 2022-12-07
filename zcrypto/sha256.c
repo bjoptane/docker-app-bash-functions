@@ -103,4 +103,7 @@ void sha256_init(sha256_ctx_t *ctx) {
 }
 
 void sha256_update(sha256_ctx_t *ctx, const uint8_t *data, size_t len) {
-    _hash_up
+    _hash_update(sha256_blk_update, ctx->hash, ctx->blk, data, len, &ctx->len);
+}
+
+void sha256_digest(sha256_ctx_t *
