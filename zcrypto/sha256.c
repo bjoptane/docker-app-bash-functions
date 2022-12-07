@@ -89,4 +89,8 @@ void sha256_hash_init(uint32_t hash[8]) {
     hash[0] = 0x6a09e667ul;
     hash[1] = 0xbb67ae85ul;
     hash[2] = 0x3c6ef372ul;
-    hash[3] = 0xa54ff53
+    hash[3] = 0xa54ff53aul;
+    hash[4] = 0x510e527ful;
+    hash[5] = 0x9b05688cul;
+    hash[6] = 0x1f83d9abul;
+    hash[7] 
