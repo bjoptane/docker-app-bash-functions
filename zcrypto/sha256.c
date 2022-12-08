@@ -114,4 +114,6 @@ void sha256_digest(sha256_ctx_t *ctx, uint8_t *data) {
 }
 
 void sha256_hexdigest(sha256_ctx_t *ctx, uint8_t *data) {
-  
+    sha256_digest(ctx, data);
+    _expand_hex(data, 32);
+}
