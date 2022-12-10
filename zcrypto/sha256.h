@@ -11,3 +11,7 @@ typedef struct {
     uint64_t len;
     uint32_t hash[8];
     uint8_t blk[64];
+} sha256_ctx_t;
+
+void sha256_init(sha256_ctx_t *ctx);
+void sha256_update(sha256_ctx_t *ctx, const uint8_t *d
