@@ -6,4 +6,11 @@
 #define T1 0x7a879d8aul
 
 static inline uint32_t _p0(uint32_t x) {
-    return x ^ _lshift(x, 9) ^ _lshift(
+    return x ^ _lshift(x, 9) ^ _lshift(x, 17);
+}
+
+static inline uint32_t _p1(uint32_t x) {
+    return x ^ _lshift(x, 15) ^ _lshift(x, 23);
+}
+
+static inline 
