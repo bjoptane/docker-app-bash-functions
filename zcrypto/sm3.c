@@ -13,4 +13,8 @@ static inline uint32_t _p1(uint32_t x) {
     return x ^ _lshift(x, 15) ^ _lshift(x, 23);
 }
 
-static inline 
+static inline uint32_t _ff0(uint32_t x, uint32_t y, uint32_t z) {
+    return x ^ y ^ z;
+}
+
+static inline uint32_t _ff1(uint32_t x, uint32_t y
