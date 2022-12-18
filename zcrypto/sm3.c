@@ -34,4 +34,10 @@ do { \
     uint32_t SS1 = _lshift(_lshift(A, 12) + E + _lshift(TT, i % 32), 7); \
     uint32_t SS2 = SS1 ^ _lshift(A, 12); \
     uint32_t TT1 = FF(A, B, C) + D + SS2 + (W[i] ^ W[i + 4]);  /* W'(j) = W(j) ^ W(j + 4) */ \
-    uint32_t TT2 = GG(E, F, G) + H + SS1 + W[i
+    uint32_t TT2 = GG(E, F, G) + H + SS1 + W[i]; \
+    D = C; \
+    C = _lshift(B, 9); \
+    B = A; \
+    A = TT1; \
+    H = G; \
+    G = _lshift(F, 19); \
