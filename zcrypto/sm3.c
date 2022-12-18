@@ -26,4 +26,9 @@ static inline uint32_t _gg0(uint32_t x, uint32_t y, uint32_t z) {
 }
 
 static inline uint32_t _gg1(uint32_t x, uint32_t y, uint32_t z) {
-    return (x &
+    return (x & y) | ((~x) & z);
+}
+
+#define CF(A, B, C, D, E, F, G, H, TT, FF, GG, i) \
+do { \
+    uint32_t SS1 = _lshift(_lshift(A
