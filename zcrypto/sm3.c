@@ -51,4 +51,5 @@ void sm3_blk_update(uint32_t hash[8], const uint8_t data[64]) {
     for (int i = 0; i < 16; ++i) {
         W[i] = _load_be_u32(data + i * 4);
     }
-    fo
+    for (int i = 16; i < 68; ++i) {
+        W[i] = _p1(W[i - 16] ^ W[i - 9] ^ _lshift(W[i - 3] , 15)) ^ _lshift(W[i - 
