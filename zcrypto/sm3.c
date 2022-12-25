@@ -41,3 +41,9 @@ do { \
     A = TT1; \
     H = G; \
     G = _lshift(F, 19); \
+    F = E; \
+    E = _p0(TT2); \
+} while (0)
+
+
+void sm3_blk_update(uint32_t hash[8], const uint8_t data[64
