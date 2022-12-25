@@ -46,4 +46,9 @@ do { \
 } while (0)
 
 
-void sm3_blk_update(uint32_t hash[8], const uint8_t data[64
+void sm3_blk_update(uint32_t hash[8], const uint8_t data[64]) {
+    uint32_t W[68];
+    for (int i = 0; i < 16; ++i) {
+        W[i] = _load_be_u32(data + i * 4);
+    }
+    fo
