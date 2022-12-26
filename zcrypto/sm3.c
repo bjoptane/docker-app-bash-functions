@@ -52,4 +52,10 @@ void sm3_blk_update(uint32_t hash[8], const uint8_t data[64]) {
         W[i] = _load_be_u32(data + i * 4);
     }
     for (int i = 16; i < 68; ++i) {
-        W[i] = _p1(W[i - 16] ^ W[i - 9] ^ _lshift(W[i - 3] , 15)) ^ _lshift(W[i - 
+        W[i] = _p1(W[i - 16] ^ W[i - 9] ^ _lshift(W[i - 3] , 15)) ^ _lshift(W[i - 13], 7) ^ W[i -6];
+    }
+
+    uint32_t A = hash[0];
+    uint32_t B = hash[1];
+    uint32_t C = hash[2];
+    u
