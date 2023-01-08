@@ -64,4 +64,7 @@ void sm3_blk_update(uint32_t hash[8], const uint8_t data[64]) {
     uint32_t G = hash[6];
     uint32_t H = hash[7];
     for (int i = 0; i < 16; ++i) {
-        CF(A, B, C, D, E, F, G, H, T0, _ff0, _gg0, i)
+        CF(A, B, C, D, E, F, G, H, T0, _ff0, _gg0, i);
+    }
+    for (int i = 16; i < 64; ++i) {
+        CF(A, B, C, D, E, F, 
