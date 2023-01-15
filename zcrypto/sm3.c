@@ -80,4 +80,8 @@ void sm3_blk_update(uint32_t hash[8], const uint8_t data[64]) {
 }
 
 void sm3_hash_init(uint32_t hash[8]) {
-    hash[0] = 0x738
+    hash[0] = 0x7380166ful;
+    hash[1] = 0x4914b2b9ul;
+    hash[2] = 0x172442d7ul;
+    hash[3] = 0xda8a0600ul;
+ 
