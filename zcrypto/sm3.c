@@ -84,4 +84,11 @@ void sm3_hash_init(uint32_t hash[8]) {
     hash[1] = 0x4914b2b9ul;
     hash[2] = 0x172442d7ul;
     hash[3] = 0xda8a0600ul;
- 
+    hash[4] = 0xa96f30bcul;
+    hash[5] = 0x163138aaul;
+    hash[6] = 0xe38dee4dul;
+    hash[7] = 0xb0fb0e4eul;
+}
+
+
+void sm
