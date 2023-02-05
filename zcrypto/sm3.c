@@ -91,4 +91,9 @@ void sm3_hash_init(uint32_t hash[8]) {
 }
 
 
-void sm
+void sm3_init(sm3_ctx_t *ctx) {
+    memset(ctx, 0, sizeof(sm3_ctx_t));
+    sm3_hash_init(ctx->hash);
+}
+
+void sm3_
