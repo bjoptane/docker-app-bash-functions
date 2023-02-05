@@ -96,4 +96,5 @@ void sm3_init(sm3_ctx_t *ctx) {
     sm3_hash_init(ctx->hash);
 }
 
-void sm3_
+void sm3_update(sm3_ctx_t *ctx, const uint8_t *data, size_t len) {
+    _hash_update(sm3_blk_update, ctx->hash, 
