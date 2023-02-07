@@ -97,4 +97,9 @@ void sm3_init(sm3_ctx_t *ctx) {
 }
 
 void sm3_update(sm3_ctx_t *ctx, const uint8_t *data, size_t len) {
-    _hash_update(sm3_blk_update, ctx->hash, 
+    _hash_update(sm3_blk_update, ctx->hash, ctx->blk, data, len, &ctx->len);
+}
+
+void sm3_digest(sm3_ctx_t *ctx, uint8_t *data) {
+    uint32_t hash[8];
+    memcpy(hash, ctx->
