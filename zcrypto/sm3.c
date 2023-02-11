@@ -107,4 +107,7 @@ void sm3_digest(sm3_ctx_t *ctx, uint8_t *data) {
     _hash_digest(be, hash, 8, data);
 }
 
-vo
+void sm3_hexdigest(sm3_ctx_t *ctx, uint8_t *data) {
+    sm3_digest(ctx, data);
+    _expand_hex(data, 32);
+}
