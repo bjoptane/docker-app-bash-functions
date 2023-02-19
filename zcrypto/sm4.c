@@ -313,3 +313,15 @@ int sm4_decrypt(sm4_ctx_t *ctx, size_t len, const uint8_t *cipher, uint8_t *plai
     }
 
     if (m == SM4_ECB_MODE) {
+        _ecb(ctx->rkey, len, cipher, plain);
+    } else if (m == SM4_CBC_MODE) {
+        _cbc_decrypt(ctx->rkey, ctx->iv, len, cipher, plain);
+    } else if (m == SM4_CFB_MODE) {
+        _cfb_decrypt(ctx->rkey, ctx->iv, len, cipher, plain);
+    } else if (m == SM4_OFB_MODE) {
+        _ofb(ctx->rkey, ctx->iv, len, cipher, plain);
+    } else {
+        return -1;
+    }
+    return 0;
+}
