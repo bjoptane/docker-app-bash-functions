@@ -92,3 +92,114 @@ static void sm4_calc_key(const uint8_t key[16], uint32_t rkey[32]) {
         uint32_t *y2 = x + ((i + 2) % 5);
         uint32_t *y3 = x + ((i + 3) % 5);
         uint32_t *y4 = x + ((i + 4) % 5);
+
+        *y4 = *y0 ^ _st2(*y1 ^ *y2 ^ *y3 ^ CK[i]);
+        rkey[i] = *y4;
+    }
+    // memset(x, 0, sizeof(x));
+}
+
+static inline void sm4_rev_key(uint32_t rkey[32]) {
+    for (int i = 0; i < 16; ++i) {
+        uint32_t t = rkey[i];
+        rkey[i] = rkey[31 - i];
+        rkey[31 - i] = t;
+    }
+}
+
+static void sm4_calc_block(const uint32_t rkey[32], const uint8_t in[16], uint8_t out[16]) {
+    uint32_t x[5];
+    x[0] = _load_be_u32(in);
+    x[1] = _load_be_u32(in + 4);
+    x[2] = _load_be_u32(in + 8);
+    x[3] = _load_be_u32(in + 12);
+
+    for (int i = 0; i < 32; ++i) {
+        uint32_t *y0 = x + (i % 5);
+        uint32_t *y1 = x + ((i + 1) % 5);
+        uint32_t *y2 = x + ((i + 2) % 5);
+        uint32_t *y3 = x + ((i + 3) % 5);
+        uint32_t *y4 = x + ((i + 4) % 5);
+
+        *y4 = *y0 ^ _st1(*y1 ^ *y2 ^ *y3 ^ rkey[i]);
+    }
+
+    _store_be_u32(x[0], out);
+    _store_be_u32(x[4], out + 4);
+    _store_be_u32(x[3], out + 8);
+    _store_be_u32(x[2], out + 12);
+    // memset(x, 0, sizeof(x));
+}
+
+
+static inline void _ecb(const uint32_t *rkey, size_t len, const uint8_t *in, uint8_t *out) {
+    for (size_t i = 0; i < len; i += 16) {
+        sm4_calc_block(rkey, in + i, out + i);
+    }
+}
+
+static inline void _cbc_encrypt(const uint32_t *rkey, uint8_t *iv, size_t len, const uint8_t *plain, uint8_t *cipher) {
+    for (size_t i = 0; i < len; i += 16) {
+        _xor_block(iv, plain + i, 16);
+        sm4_calc_block(rkey, iv, cipher + i);
+        memcpy(iv, cipher + i, 16);
+    }
+}
+
+static inline void _cbc_decrypt(const uint32_t *rkey, uint8_t *iv, size_t len, const uint8_t *cipher, uint8_t *plain) {
+    for (size_t i = 0; i < len; i += 16) {
+        sm4_calc_block(rkey, cipher + i, plain + i);
+        _xor_block(plain + i, iv, 16);
+        memcpy(iv, cipher + i, 16);
+    }
+}
+
+static inline void _cfb_encrypt(const uint32_t *rkey, uint8_t *iv, size_t len, const uint8_t *plain, uint8_t *cipher) {
+    for (size_t i = 0; i < len; i += 16) {
+        sm4_calc_block(rkey, iv, cipher + i);
+        _xor_block(cipher + i, plain + i, 16);
+        memcpy(iv, cipher + i, 16);
+    }
+}
+
+static inline void _cfb_decrypt(const uint32_t *rkey, uint8_t *iv, size_t len, const uint8_t *cipher, uint8_t *plain) {
+    for (size_t i = 0; i < len; i += 16) {
+        sm4_calc_block(rkey, iv, plain + i);
+        _xor_block(plain + i, cipher + i, 16);
+        memcpy(iv, cipher + i, 16);
+    }
+}
+
+static inline void _ofb(const uint32_t *rkey, uint8_t *iv, size_t len, const uint8_t *in, uint8_t *out) {
+    for (size_t i = 0; i < len; i += 16) {
+        sm4_calc_block(rkey, iv, out + i);
+        memcpy(iv, out + i, 16);
+        _xor_block(out + i, in + i, 16);
+    }
+}
+
+
+void sm4_ecb_encrypt(const uint8_t key[16], size_t len, const uint8_t *plain, uint8_t *cipher) {
+    uint32_t rkey[32];
+    sm4_calc_key(key, rkey);
+    _ecb(rkey, len, plain, cipher);
+    // memset(rkey, 0, sizeof(rkey));
+}
+
+void sm4_ecb_decrypt(const uint8_t key[16], size_t len, const uint8_t *cipher, uint8_t *plain) {
+    uint32_t rkey[32];
+    sm4_calc_key(key, rkey);
+    sm4_rev_key(rkey);
+    _ecb(rkey, len, cipher, plain);
+    // memset(rkey, 0, sizeof(rkey));
+}
+
+void sm4_cbc_encrypt(const uint8_t key[16], const uint8_t iv[16], size_t len, const uint8_t *plain, uint8_t *cipher) {
+    uint32_t rkey[32];
+    sm4_calc_key(key, rkey);
+    uint8_t out[16];
+    memcpy(out, iv, 16);
+    _cbc_encrypt(rkey, out, len, plain, cipher);
+    // memset(rkey, 0, sizeof(rkey));
+    // memset(out, 0, sizeof(out));
+}
