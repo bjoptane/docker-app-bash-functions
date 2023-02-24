@@ -14,4 +14,5 @@ extern "C" {
         #define __ZCRYPO_BYTE_ORDER__ 2
     #endif
 #else
-    #error Unknown
+    #error Unknown endianness, please define __ZCRYPO_BYTE_ORDER__ to 1(little endian) or 2(big endian)
+    // #define __ZCRYPO_BYTE_ORDER_
