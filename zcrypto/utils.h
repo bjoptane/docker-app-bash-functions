@@ -15,4 +15,11 @@ extern "C" {
     #endif
 #else
     #error Unknown endianness, please define __ZCRYPO_BYTE_ORDER__ to 1(little endian) or 2(big endian)
-    // #define __ZCRYPO_BYTE_ORDER_
+    // #define __ZCRYPO_BYTE_ORDER__ 1
+    // #define __ZCRYPO_BYTE_ORDER__ 2
+#endif
+
+
+#if __ZCRYPO_BYTE_ORDER__ == 1
+
+static inline uint32_t _lo
