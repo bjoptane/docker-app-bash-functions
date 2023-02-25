@@ -22,4 +22,8 @@ extern "C" {
 
 #if __ZCRYPO_BYTE_ORDER__ == 1
 
-static inline uint32_t _lo
+static inline uint32_t _load_le_u32(const uint8_t bs[4]) {
+    return *(uint32_t*)bs;
+}
+
+static inline uint32_t _load_be_u32(const uint8_t bs[4]) {
