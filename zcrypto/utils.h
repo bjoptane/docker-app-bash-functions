@@ -27,3 +27,7 @@ static inline uint32_t _load_le_u32(const uint8_t bs[4]) {
 }
 
 static inline uint32_t _load_be_u32(const uint8_t bs[4]) {
+    return ((uint32_t)bs[0] << 24) | ((uint32_t)bs[1] << 16) | ((uint32_t)bs[2] << 8) | bs[3];
+}
+
+static inline void _stor
