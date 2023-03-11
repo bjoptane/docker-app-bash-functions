@@ -34,4 +34,6 @@ static inline void _store_le_u32(const uint32_t x, uint8_t bs[4]) {
     *(uint32_t*)bs = x;
 }
 
-static inline
+static inline void _store_be_u32(const uint32_t x, uint8_t bs[4]) {
+    bs[0] = (x >> 24) & 0xff;
+    bs[1] = (
