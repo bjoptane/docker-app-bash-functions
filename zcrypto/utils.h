@@ -45,4 +45,8 @@ static inline void _store_le_u64(const uint64_t x, uint8_t bs[8]) {
     *(uint64_t*)bs = x;
 }
 
-static inline void _store_be_u64(const uint64_t x, uint8_t bs[8]
+static inline void _store_be_u64(const uint64_t x, uint8_t bs[8]) {
+    bs[0] = (x >> 56) & 0xff;
+    bs[1] = (x >> 48) & 0xff;
+    bs[2] = (x >> 40) & 0xff;
+    bs[3] = (x >> 3
