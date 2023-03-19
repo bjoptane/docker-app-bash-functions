@@ -49,4 +49,8 @@ static inline void _store_be_u64(const uint64_t x, uint8_t bs[8]) {
     bs[0] = (x >> 56) & 0xff;
     bs[1] = (x >> 48) & 0xff;
     bs[2] = (x >> 40) & 0xff;
-    bs[3] = (x >> 3
+    bs[3] = (x >> 32) & 0xff;
+    bs[4] = (x >> 24) & 0xff;
+    bs[5] = (x >> 16) & 0xff;
+    bs[6] = (x >> 8) & 0xff;
+    bs[7] =
