@@ -53,4 +53,10 @@ static inline void _store_be_u64(const uint64_t x, uint8_t bs[8]) {
     bs[4] = (x >> 24) & 0xff;
     bs[5] = (x >> 16) & 0xff;
     bs[6] = (x >> 8) & 0xff;
-    bs[7] =
+    bs[7] = (x) & 0xff;
+}
+
+#else
+
+static inline uint32_t _load_le_u32(const uint8_t bs[4]) {
+    return ((uint32_t)bs[3] 
