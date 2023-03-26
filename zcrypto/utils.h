@@ -66,4 +66,8 @@ static inline uint32_t _load_be_u32(const uint8_t bs[4]) {
     return *(uint32_t*)bs;
 }
 
-static inline void _store_le_u32(const uint32_t x, uint8_t bs
+static inline void _store_le_u32(const uint32_t x, uint8_t bs[4]) {
+    bs[3] = (x >> 24) & 0xff;
+    bs[2] = (x >> 16) & 0xff;
+    bs[1] = (x >> 8) & 0xff;
+    bs[0
