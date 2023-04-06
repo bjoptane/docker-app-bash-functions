@@ -89,4 +89,11 @@ static inline void _store_le_u64(const uint64_t x, uint8_t bs[8]) {
 }
 
 static inline void _store_be_u64(const uint64_t x, uint8_t bs[8]) {
-   
+    *(uint64_t*)bs = x;
+}
+
+#endif // __ZCRYPO_BYTE_ORDER__
+
+
+
+static inline uint32_t _lshift(uint32_t x, int n) {
