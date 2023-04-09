@@ -104,4 +104,10 @@ static inline uint32_t _rshift(uint32_t x, int n) {
     return (x << (32 - n)) | (x >> n);
 }
 
-static inline void _xor_block(uint8_t *out, const uint8_t *in, size_t len) 
+static inline void _xor_block(uint8_t *out, const uint8_t *in, size_t len) {
+    for (size_t i = 0; i < len; ++i) {
+        out[i] ^= in[i];
+    }
+}
+
+static inline char _hex(uint8_t n) 
