@@ -101,4 +101,7 @@ static inline uint32_t _lshift(uint32_t x, int n) {
 }
 
 static inline uint32_t _rshift(uint32_t x, int n) {
-    return (x 
+    return (x << (32 - n)) | (x >> n);
+}
+
+static inline void _xor_block(uint8_t *out, const uint8_t *in, size_t len) 
