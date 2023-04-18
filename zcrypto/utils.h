@@ -113,4 +113,9 @@ static inline void _xor_block(uint8_t *out, const uint8_t *in, size_t len) {
 static inline char _hex(uint8_t n) {
     static const char HEX[16] = {
         '0', '1', '2', '3', '4', '5', '6', '7',
-        '8', '9',
+        '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+    };
+    return HEX[n];
+}
+
+// expand uint8 data to hex format in place, so data should have len
