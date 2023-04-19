@@ -118,4 +118,6 @@ static inline char _hex(uint8_t n) {
     return HEX[n];
 }
 
-// expand uint8 data to hex format in place, so data should have len
+// expand uint8 data to hex format in place, so data should have len * 2 space
+static inline void _expand_hex(uint8_t *data, size_t len) {
+    for (size_t i = 0; i < len; ++i
